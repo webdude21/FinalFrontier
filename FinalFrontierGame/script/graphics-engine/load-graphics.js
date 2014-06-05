@@ -6,8 +6,11 @@ var gameArt = (function () {
             return instance;
         }
         instance = this;
-        instance.playerImage = new Image();
-        instance.playerImage.src = 'resources/art/player-ship.png';
+        instance.playerImage = (function () {
+            var image = new Image();
+            image.src = 'resources/art/player-ship.png';
+            return image;
+        });
     };
 
     return gameArt;

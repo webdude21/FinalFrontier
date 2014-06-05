@@ -8,16 +8,21 @@ var gameField = (function() {
         }
         instance = this;
         instance.stage = new Kinetic.Stage({
-            container: 'kinetic-container',
+            container: 'game-window',
             width: 800,
             height: 600
         });
-        instance.createNewLayer = function(){
-            return new Kinetic.Layer();
+        instance.addNewLayer = function(){
+            var newLayer = new Kinetic.Layer();
+            instance.stage.add(newLayer);
+            return newLayer;
         };
-        instance.addLayer = function(layer){
-            instance.stage.add(layer)
-        }
+        instance.foreground = (function(){
+            addNewLayer();
+        });
+        instance.background = (function(){
+            addNewLayer();
+        });
     };
 
     return gameField;

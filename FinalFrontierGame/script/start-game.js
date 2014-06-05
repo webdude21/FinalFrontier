@@ -1,3 +1,3 @@
 function startGame() {
-   // TODO Implement game play
+    attachKeyboardControl(playerShip, 'direction');
 }

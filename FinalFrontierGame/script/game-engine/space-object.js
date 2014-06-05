@@ -16,7 +16,6 @@ function SpaceObject(x, y, w, h, rotation) {
     };
 
     this.draw = function(drawer){
-        // TODO - not finished, just a sketch
-        drawer.draw(this.x, this.y, this.width, this.height);
+        drawer.draw(this.x, this.y, this.width, this.height, this.rotation);
     }
 }
