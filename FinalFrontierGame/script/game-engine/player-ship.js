@@ -1,16 +1,15 @@
-var playerShip = (function () {
+var PlayerShip = (function () {
     'use strict';
 
     var instance;
-    playerShip = function () {
+    PlayerShip = function (x, y, img) {
         if (instance) {
             return instance;
         }
-        SpaceObject.call(this);
         instance = this;
-        instance.image = gameArt.playerImage;
-        instance.width = instance.image.width;
-        instance.height = instance.image.height;
+        SpaceObject.call(instance, x, y, img.width, img.height);
+        instance.prototype = Object.create(SpaceObject.prototype);
+        instance.image = img;
         instance.direction = 'left';
         instance.draw = function (drawer) {
             drawer.draw(instance.x, instance.y, instance.width,
@@ -18,6 +17,6 @@ var playerShip = (function () {
         }
     };
 
-    return playerShip;
+    return PlayerShip;
 
 }());

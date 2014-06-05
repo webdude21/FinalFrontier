@@ -1,18 +1,14 @@
-var gameArt = (function () {
+var GameArt = (function () {
     'use strict';
     var instance;
-    gameArt = function () {
+    GameArt = function () {
         if (instance) {
             return instance;
         }
         instance = this;
-        instance.playerImage = (function () {
-            var image = new Image();
-            image.src = 'resources/art/player-ship.png';
-            return image;
-        });
+        instance.playerImage = new Image();
+        instance.playerImage.src = 'resources/art/player-ship.png';
     };
 
-    return gameArt;
-
+    return GameArt;
 }());

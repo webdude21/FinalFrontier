@@ -1,7 +1,7 @@
-var spaceObjectManager = (function () {
+var SpaceObjectManager = (function () {
     'use strict';
     var instance;
-    spaceObjectManager = function () {
+    SpaceObjectManager = function () {
         if (instance) {
             return instance;
         }
@@ -11,7 +11,7 @@ var spaceObjectManager = (function () {
         instance.isUpdating = false;
         instance.spaceObjectsCount = instance.spaceObjects.length;
         instance.add = function (objectToAdd) {
-            if (objectToAdd instanceof SpaceObject) {
+            if (objectToAdd.prototype instanceof SpaceObject) {
                 if (!instance.isUpdating) {
                     instance.spaceObjects.push(objectToAdd);
                 } else {
@@ -51,5 +51,5 @@ var spaceObjectManager = (function () {
         }
     };
 
-    return spaceObjectManager;
+    return SpaceObjectManager;
 }());
