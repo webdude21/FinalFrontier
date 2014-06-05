@@ -15,8 +15,8 @@ function SpaceObject(x, y, w, h, rotation) {
         // TODO to be implemented by descendants
     };
 
-    SpaceObject.prototype.bindToDrawer = function bindToDrawer(drawer) {
-        this.visualRepresentation = drawer.generateImage(this.x, this.y,
-            this.width, this.height, this.rotation, this.image);
-    }
+    this.bindToDrawer = function bindToDrawer(drawer) {
+        this.visualRepresentation = drawer.generateImage(this.x,
+            this.y, this.width, this.height, this.rorotation)
+    };
 }
