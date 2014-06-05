@@ -11,17 +11,12 @@ var SpaceObjectManager = (function () {
         instance.isUpdating = false;
         instance.spaceObjectsCount = instance.spaceObjects.length;
         instance.add = function (objectToAdd) {
-            if (objectToAdd instanceof SpaceObject || objectToAdd.prototype instanceof SpaceObject) {
-                if (!instance.isUpdating) {
-                    instance.spaceObjects.push(objectToAdd);
-                } else {
-                    instance.pendingObjects.push(objectToAdd);
-                }
-                objectToAdd.bindToDrawer(drawer);
+            if (!instance.isUpdating) {
+                instance.spaceObjects.push(objectToAdd);
             } else {
-                throw new TypeError("objectToAdd argument should be an " +
-                    "instance of the SpaceObject class!")
+                instance.pendingObjects.push(objectToAdd);
             }
+            objectToAdd.bindToDrawer(drawer);
         };
         instance.update = function () {
             var i;

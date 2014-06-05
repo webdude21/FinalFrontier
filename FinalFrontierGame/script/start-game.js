@@ -8,7 +8,7 @@ function startGame() {
     var backgroundDrawer = new KineticDrawer(gameField.background);
     var background = gameArt.backgroundImage;
     backgroundDrawer.generateImage(0, 0, background.width, background.height, 0, background);
-    backgroundDrawer.drawAll();
+   // backgroundDrawer.drawAll();
     attachKeyboardControl(playerShip, 'direction');
     spaceObjectManager.add(playerShip);
     spaceObjectManager.add(new SpaceObject(200, 200, 100, 100, 0));
