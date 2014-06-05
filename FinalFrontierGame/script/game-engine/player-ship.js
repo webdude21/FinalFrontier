@@ -6,13 +6,14 @@ var PlayerShip = (function () {
         if (instance) {
             return instance;
         }
-        PlayerShip.prototype = new SpaceObject();
+
+        SpaceObject.call(this, args);
+        PlayerShip.prototype = new SpaceObject(args);
         PlayerShip.prototype.constructor = PlayerShip;
         instance = this;
-        SpaceObject.call(instance, args);
         instance.direction = args.direction || 'left';
         instance.update = function update() {
-            instance.visualRepresentation.move({
+            instance.visual.move({
                 x: 1,
                 y: 2
             });

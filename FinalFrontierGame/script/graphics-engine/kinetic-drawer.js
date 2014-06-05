@@ -20,7 +20,7 @@ var KineticDrawer = (function () {
         };
         var that = this;
         this.addObject = function addObject(obj) {
-            that.cavas.add(obj);
+            that.canvas.add(obj);
         };
 
         this.drawAll = function () {
