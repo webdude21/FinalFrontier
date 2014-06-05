@@ -1,7 +1,7 @@
 var SpaceObjectManager = (function () {
     'use strict';
     var instance;
-    SpaceObjectManager = function () {
+    SpaceObjectManager = function (drawer) {
         if (instance) {
             return instance;
         }
@@ -17,6 +17,7 @@ var SpaceObjectManager = (function () {
                 } else {
                     instance.pendingObjects.push(objectToAdd);
                 }
+                objectToAdd.bindToDrawer(drawer);
             } else {
                 throw new TypeError("objectToAdd argument should be an " +
                     "instance of the SpaceObject class!")
@@ -44,12 +45,6 @@ var SpaceObjectManager = (function () {
                 }
             }
         };
-        instance.draw = function (drawer) {
-            for (var i = 0; i < instance.spaceObjects.length; i++) {
-                instance.spaceObjects[i].draw(drawer);
-            }
-            drawer.drawAll();
-        }
     };
 
     return SpaceObjectManager;

@@ -11,11 +11,12 @@ function SpaceObject(x, y, w, h, rotation) {
     // this should show the current rotation of the object.
     this.rotation = rotation || 0;
 
-    this.update = function(){
+    this.update = function () {
         // TODO to be implemented by descendants
     };
 
-    this.draw = function(drawer){
-        drawer.addObjectsToDraw(this.x, this.y, this.width, this.height, this.rotation);
+    SpaceObject.prototype.bindToDrawer = function bindToDrawer(drawer) {
+        this.visualRepresentation = drawer.generateImage(this.x, this.y,
+            this.width, this.height, this.rotation, this.image);
     }
 }

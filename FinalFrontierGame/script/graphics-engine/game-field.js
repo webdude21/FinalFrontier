@@ -12,13 +12,14 @@ var GameField = (function () {
             width: width,
             height: height
         });
-        instance.addNewLayer = function () {
-            var newLayer = new Kinetic.Layer();
+        instance.addNewLayer = function (zIndex) {
+            var newLayer = new Kinetic.Layer({});
             instance.stage.add(newLayer);
+            newLayer.zIndex = zIndex;
             return newLayer;
         };
-        instance.foreground = instance.addNewLayer();
-        instance.background = instance.addNewLayer();
+        instance.foreground = instance.addNewLayer(10);
+        instance.background = instance.addNewLayer(0);
     };
     return GameField;
 }());
