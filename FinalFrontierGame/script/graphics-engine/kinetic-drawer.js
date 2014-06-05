@@ -18,6 +18,11 @@ var KineticDrawer = (function () {
             this.canvas.add(newImage);
             return newImage;
         };
+        var that = this;
+        this.addObject = function addObject(obj) {
+            that.cavas.add(obj);
+        };
+
         this.drawAll = function () {
             this.canvas.batchDraw();
         };

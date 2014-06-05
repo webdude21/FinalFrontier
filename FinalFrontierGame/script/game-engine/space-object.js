@@ -1,26 +1,6 @@
-function SpaceObject(x, y, w, h, rotation) {
-    // the main properties of the object
-    this.x = x;
-    this.y = y;
-    this.width = w || 1;
-    this.height = h || 1;
-
-    // this shows if the object is up for removal
+function SpaceObject(args) {
+    this.visualRepresentation = args.shape;
     this.hasExpired = false;
-
-    // this should show the current rotation of the object.
-    this.rotation = rotation || 0;
-
+    this.rotation = args.rotation || 0;
     return this;
 }
-
-// Methods
-SpaceObject.prototype = {
-    bindToDrawer: function bindToDrawer(drawer) {
-        this.visualRepresentation = drawer.generateImage(this.x,
-            this.y, this.width, this.height, this.rotation)
-    },
-    update: function update() {
-        // TODO
-    }
-};

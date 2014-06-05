@@ -16,7 +16,7 @@ var SpaceObjectManager = (function () {
             } else {
                 instance.pendingObjects.push(objectToAdd);
             }
-            objectToAdd.bindToDrawer(drawer);
+            drawer.addObject(objectToAdd.visualRepresentation);
         };
         instance.update = function () {
             var i;

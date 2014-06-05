@@ -11,8 +11,9 @@ var GameArt = (function () {
             newImage.src = src;
             return newImage;
         };
-        instance.playerImage = instance.loadImage('resources/art/enemy.png');
+        instance.playerImage = instance.loadImage('resources/art/player-ship.png');
         instance.backgroundImage = instance.loadImage('resources/art/space-background.jpg');
+        instance.enemyImage = instance.loadImage('resources/art/enemy.png');
     };
 
     return GameArt;
