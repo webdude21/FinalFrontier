@@ -4,7 +4,7 @@ function attachKeyboardControl(controllableObj, prop) {
     var UP_ARROW = 38;
     var DOWN_ARROW = 40;
 
-    document.onkeydown = function (event) {
+    document.addEventListener('keypress', function (event) {
         event = event || window.event;
         switch (event.keyCode) {
             case LEFT_ARROW:
@@ -19,6 +19,9 @@ function attachKeyboardControl(controllableObj, prop) {
             case DOWN_ARROW:
                 controllableObj[prop] = 'down';
                 break;
+            default:
+                controllableObj[prop] = 'none';
+                break;
         }
-    }
+    })
 }
