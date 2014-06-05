@@ -1,3 +1,3 @@
 function startGame() {
-    var spaceObjectManager = new spaceObjectManager();
+   // TODO Implement game play
 }

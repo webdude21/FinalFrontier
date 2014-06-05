@@ -12,5 +12,11 @@ function SpaceObject(x, y, w, h, rotation) {
     this.rotation = rotation || 0;
 
     this.update = function(){
+        // TODO to be implemented by descendants
+    };
+
+    this.draw = function(drawer){
+        // TODO - not finished, just a sketch
+        drawer.draw(this.x, this.y, this.width, this.height);
     }
 }

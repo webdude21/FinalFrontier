@@ -43,10 +43,13 @@ var spaceObjectManager = (function () {
                     instance.spaceObjects.unset(instance.spaceObjects[i]);
                 }
             }
+        };
+        instance.draw = function (drawer) {
+            for (var i = 0; i < instance.spaceObjects.length; i++) {
+                instance.spaceObjects[i].draw(drawer);
+            }
         }
     };
 
     return spaceObjectManager;
 }());
-
-
