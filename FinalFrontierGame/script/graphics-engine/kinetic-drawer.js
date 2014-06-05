@@ -3,6 +3,9 @@ var KineticDrawer = (function () {
 
     KineticDrawer = function (canvas) {
         this.canvas = canvas;
+        this.clear = function () {
+            this.canvas.clear(0, 0, canvas.width, canvas.height);
+        };
         this.drawWithNoImg = function (x, y, width, height, rotation) {
             this.canvas.add(new Kinetic.Circle({
                 x: x,
@@ -13,7 +16,7 @@ var KineticDrawer = (function () {
                 strokeWidth: 1
             }))
         };
-        this.draw = function (x, y, width, height, rotation, img) {
+        this.addObjectsToDraw = function (x, y, width, height, rotation, img) {
             if (img === undefined) {
                 this.drawWithNoImg(x, y, width, height, rotation)
             }
@@ -27,7 +30,10 @@ var KineticDrawer = (function () {
                     rotation: rotation
                 }))
             }
-        }
+        };
+        this.drawAll = function () {
+            this.canvas.batchDraw();
+        };
     };
     return KineticDrawer;
 }());

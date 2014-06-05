@@ -7,12 +7,12 @@ var PlayerShip = (function () {
             return instance;
         }
         instance = this;
-        SpaceObject.call(instance, x, y, img.width, img.height);
-        instance.prototype = Object.create(SpaceObject.prototype);
+        instance.prototype = new SpaceObject(x, y, img.width, img.height);
+        SpaceObject.call(this, x, y, img.width, img.height);
         instance.image = img;
         instance.direction = 'left';
         instance.draw = function (drawer) {
-            drawer.draw(instance.x, instance.y, instance.width,
+            drawer.addObjectsToDraw(instance.x, instance.y, instance.width,
                 instance.height, instance.rotation, instance.image);
         }
     };

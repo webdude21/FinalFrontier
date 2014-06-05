@@ -16,6 +16,6 @@ function SpaceObject(x, y, w, h, rotation) {
     };
 
     this.draw = function(drawer){
-        drawer.draw(this.x, this.y, this.width, this.height, this.rotation);
+        drawer.addObjectsToDraw(this.x, this.y, this.width, this.height, this.rotation);
     }
 }

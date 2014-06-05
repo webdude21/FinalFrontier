@@ -18,7 +18,7 @@ var GameField = (function () {
             return newLayer;
         };
         instance.foreground = instance.addNewLayer();
-        instance.background = instance.addNewLayer()
+        instance.background = instance.addNewLayer();
     };
     return GameField;
 }());

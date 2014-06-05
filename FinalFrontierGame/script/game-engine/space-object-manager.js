@@ -11,7 +11,7 @@ var SpaceObjectManager = (function () {
         instance.isUpdating = false;
         instance.spaceObjectsCount = instance.spaceObjects.length;
         instance.add = function (objectToAdd) {
-            if (objectToAdd.prototype instanceof SpaceObject) {
+            if (objectToAdd instanceof SpaceObject || objectToAdd.prototype instanceof SpaceObject) {
                 if (!instance.isUpdating) {
                     instance.spaceObjects.push(objectToAdd);
                 } else {
@@ -48,6 +48,7 @@ var SpaceObjectManager = (function () {
             for (var i = 0; i < instance.spaceObjects.length; i++) {
                 instance.spaceObjects[i].draw(drawer);
             }
+            drawer.drawAll();
         }
     };
 
