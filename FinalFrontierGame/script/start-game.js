@@ -17,10 +17,17 @@ function startGame() {
             y: 20,
             image: gameArt.playerImage,
             width: gameArt.playerImage.width,
-            height: gameArt.playerImage.height
-        }),
+            height: gameArt.playerImage.height,
+            offset: {x:20, y:20}
+        })
     });
-    attachKeyboardControl(playerShip, 'direction');
+
+    attachKeyboardControl({
+        controllableObj: playerShip,
+        direction: 'direction',
+        rotation: 'rotation'
+    });
+
     spaceObjectManager.add(playerShip);
 
     function runGame() {

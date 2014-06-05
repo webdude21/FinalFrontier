@@ -1,7 +1,8 @@
 function SpaceObject(args) {
     this.visual = args.shape;
     this.hasExpired = false;
-    this.rotation = args.rotation || 0;
+    this.rotation = 'none';
+    this.direction = 'none';
     this.update = function update(){
 
     };

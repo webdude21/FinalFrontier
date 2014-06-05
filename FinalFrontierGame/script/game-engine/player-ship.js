@@ -11,7 +11,6 @@ var PlayerShip = (function () {
         PlayerShip.prototype = new SpaceObject(args);
         PlayerShip.prototype.constructor = PlayerShip;
         instance = this;
-        instance.direction = args.direction || 'none';
         instance.move = function move(step) {
             switch (instance.direction) {
                 case 'left':
@@ -40,8 +39,20 @@ var PlayerShip = (function () {
                     break;
             }
         };
+        instance.rotate = function rotate(step){
+            switch (instance.rotation){
+                case 'rotateLeft':
+                    instance.visual.rotate(-step);
+                    break;
+                case 'rotateRight':
+                    instance.visual.rotate(step);
+                    break;
+            }
+        };
+
         instance.update = function update() {
-            instance.move(1);
+            instance.move(3);
+            instance.rotate(6);
         }
     };
 
