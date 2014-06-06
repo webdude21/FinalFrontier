@@ -1,9 +1,9 @@
 function startGame() {
     // initialize game variables
-    var gameArt = new GameArt();
+    // var gameArt = new GameArt();
     var gameField = new GameField(800, 600, 'game-window');
     var backgroundDrawer = new KineticDrawer(gameField.background);
-    var background = gameArt.backgroundImage;
+    var background = GAME_ART.BACKGROUND;
     backgroundDrawer.generateImage(0, 0, background.width, background.height, 0, background);
     backgroundDrawer.drawAll();
     var foregroundDrawer = new KineticDrawer(gameField.foreground);
@@ -16,9 +16,9 @@ function startGame() {
         shape: new Kinetic.Image({
             x: 50,
             y: 50,
-            image: gameArt.playerImage,
-            width: gameArt.playerImage.width,
-            height: gameArt.playerImage.height,
+            image: GAME_ART.PLAYER_SHIP,
+            width: GAME_ART.PLAYER_SHIP.width,
+            height: GAME_ART.PLAYER_SHIP.height,
             speed: 5,
             offset: {x: 20, y: 20}
         })
@@ -57,9 +57,9 @@ function startGame() {
             shape: new Kinetic.Image({
                 x: x,
                 y: y,
-                image: gameArt.enemyImage,
-                width: gameArt.enemyImage.width,
-                height: gameArt.enemyImage.height,
+                image: GAME_ART.ENEMY,
+                width: GAME_ART.ENEMY.width,
+                height: GAME_ART.ENEMY.height,
                 offset: {x: 20, y: 20},
                 speed: 1
             })

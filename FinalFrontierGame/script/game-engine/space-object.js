@@ -50,6 +50,13 @@ function SpaceObject(args) {
         };
     };
 
+    this.getCenterPoint = function() {
+        return {
+            x: this.visual.attrs.x + this.visual.attrs.width/2,
+            y: this.visual.attrs.y + this.visual.attrs.height/2
+        };
+    };
+
     this.update = function update() {
     };
 
