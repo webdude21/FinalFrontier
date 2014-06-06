@@ -15,13 +15,13 @@ function startGame() {
         spaceObjectManager.add(new Walker({
             rotation: 'rotateRight',
             rotationSpeed: 2,
+            speed: 2,
             shape: new Kinetic.Image({
                 x: validPosition.x,
                 y: validPosition.y,
                 image: GAME_ART.ENEMY,
                 width: GAME_ART.ENEMY.width,
                 height: GAME_ART.ENEMY.height,
-                speed: 1,
                 offset: {x: 20, y: 20}
             })
         }));
@@ -37,13 +37,13 @@ function startGame() {
     var walkerGeneratorID = setInterval(generateRandomWalker, 4000);
     var playerShip = new PlayerShip({
         rotation: 0,
+        speed: 2,
         shape: new Kinetic.Image({
             x: 50,
             y: 50,
             image: GAME_ART.PLAYER_SHIP,
             width: GAME_ART.PLAYER_SHIP.width,
             height: GAME_ART.PLAYER_SHIP.height,
-            speed: 5,
             offset: {x: 20, y: 20}
         })
     });
