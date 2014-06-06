@@ -20,11 +20,17 @@ var SpaceObjectManager = (function () {
             drawer.addObject(objectToAdd.visual);
         };
         instance.update = function () {
+            var gameInfo = {
+                xBound: drawer.canvas.canvas.width,
+                yBound: drawer.canvas.canvas.height,
+                otherObjects: instance.spaceObjects
+            };
+
             var i;
             instance.isUpdating = true;
 
             for (i = 0; i < instance.spaceObjects.length; i++) {
-                instance.spaceObjects[i].update();
+                instance.spaceObjects[i].update(gameInfo);
             }
 
             instance.isUpdating = false;
