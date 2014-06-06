@@ -13,8 +13,9 @@ function attachKeyboardControl(args) {
     var controllableObj = args.controllableObj;
     var direction = args.directions;
     var rotation = args.rotation;
+    var objectHandler = args.objectHandler;
 
-    document.addEventListener('keydown', function (event) {
+    objectHandler.addEventListener('keydown', function (event) {
         event = event || window.event;
         switch (event.keyCode) {
             case LEFT_ARROW:
@@ -55,7 +56,7 @@ function attachKeyboardControl(args) {
                 break;
             case RIGHT_ARROW:
             case D_KEY:
-                controllableObj[direction].right  = false;
+                controllableObj[direction].right = false;
                 break;
             case DOWN_ARROW:
             case S_KEY:

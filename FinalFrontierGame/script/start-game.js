@@ -34,12 +34,11 @@ function startGame() {
     // trying to attack mouse control to ship
     attachMouseControl({
         controllableObj: playerShip,
-        stage: gameField.stage
+        objectHandler: gameField.stage
     });
 
-
     spaceObjectManager.add(playerShip);
-    console.log(playerShip.getLocation());
+
     function runGame() {
         spaceObjectManager.update();
         foregroundDrawer.drawAll();

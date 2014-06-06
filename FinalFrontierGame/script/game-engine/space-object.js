@@ -12,15 +12,12 @@ function SpaceObject(args) {
         if (this.direction.left) {
             newX -= step;
         }
-
         if (this.direction.right) {
             newX += step;
         }
-
         if (this.direction.up) {
             newY -= step;
         }
-        
         if (this.direction.down) {
             newY += step;
         }
@@ -43,17 +40,17 @@ function SpaceObject(args) {
         this.visual.rotate(step);
     };
 
-    this.getLocation = function() {
+    this.getLocation = function () {
         return {
             x: this.visual.attrs.x,
             y: this.visual.attrs.y
         };
     };
 
-    this.getCenterPoint = function() {
+    this.getCenterPoint = function () {
         return {
-            x: this.visual.attrs.x + this.visual.attrs.width/2,
-            y: this.visual.attrs.y + this.visual.attrs.height/2
+            x: this.visual.attrs.x + this.visual.attrs.width / 2,
+            y: this.visual.attrs.y + this.visual.attrs.height / 2
         };
     };
 
