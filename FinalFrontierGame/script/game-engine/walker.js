@@ -5,8 +5,8 @@ function Walker(args) {
     this.rotationSpeed = args.rotationSpeed || 5;
     this.changeDirectionCounter = 0;
     this.direction = {x: 0, y: 0};
-    
-    this.move = function move(){
+
+    this.move = function move() {
         this.visual.move(this.direction);
     };
 
@@ -16,14 +16,14 @@ function Walker(args) {
             y: randomInt(-this.speed, this.speed)};
     };
 
-    this.update = function update() {
+    this.update = function update(gameInfo) {
         this.rotate(this.rotationSpeed);
         this.changeDirectionCounter++;
         if (this.changeDirectionCounter === 100) {
             this.randomDirectionChange();
             this.changeDirectionCounter = 0;
         }
-
         this.move();
+        this.checkIfExpired(gameInfo);
     };
 }

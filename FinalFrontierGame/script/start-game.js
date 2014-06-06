@@ -11,14 +11,13 @@ function startGame() {
     var spaceObjectManager = new SpaceObjectManager(foregroundDrawer);
 
     var generateRandomWalker = function () {
-        var randX = randomInt(20, GAME_FIELD_WIDTH - 20);
-        var randY = randomInt(20, GAME_FIELD_HEIGHT - 20);
+        validPosition = generateValidPosition(GAME_ART.ENEMY.height, GAME_ART.ENEMY.width);
         spaceObjectManager.add(new Walker({
             rotation: 'rotateRight',
             rotationSpeed: 2,
             shape: new Kinetic.Image({
-                x: randX,
-                y: randY,
+                x: validPosition.x,
+                y: validPosition.y,
                 image: GAME_ART.ENEMY,
                 width: GAME_ART.ENEMY.width,
                 height: GAME_ART.ENEMY.height,
@@ -27,6 +26,13 @@ function startGame() {
             })
         }));
     };
+
+    function generateValidPosition(objectHeight, objectWidth) {
+        return {
+            x: randomInt(objectWidth, GAME_FIELD_WIDTH - objectWidth),
+            y: randomInt(objectHeight, GAME_FIELD_HEIGHT - objectHeight)
+        }
+    }
 
     var walkerGeneratorID = setInterval(generateRandomWalker, 4000);
     var playerShip = new PlayerShip({
