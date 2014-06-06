@@ -5,14 +5,17 @@ function Walker(args) {
     this.rotationSpeed = args.rotationSpeed || 5;
     this.changeDirectionCounter = 0;
     this.direction = {x: 0, y: 0};
+    
     this.move = function move(){
         this.visual.move(this.direction);
     };
+
     this.randomDirectionChange = function randomMove() {
         this.direction = {
             x: randomInt(-this.speed, this.speed),
             y: randomInt(-this.speed, this.speed)};
     };
+
     this.update = function update() {
         this.rotate(this.rotationSpeed);
         this.changeDirectionCounter++;
@@ -20,6 +23,7 @@ function Walker(args) {
             this.randomDirectionChange();
             this.changeDirectionCounter = 0;
         }
+
         this.move();
-    }
+    };
 }

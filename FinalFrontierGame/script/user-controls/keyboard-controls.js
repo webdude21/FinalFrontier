@@ -68,5 +68,5 @@ function attachKeyboardControl(args) {
                 controllableObj[rotation] = 'none';
                 break;
         }
-    })
+    });
 }

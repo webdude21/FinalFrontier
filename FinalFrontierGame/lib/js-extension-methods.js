@@ -9,17 +9,17 @@ if (!Array.prototype.unset) {
 if (!Array.prototype.clear) {
     Array.prototype.clear = function () {
         this.length = 0;
-    }
+    };
 }
 
 if (!window.requestAnimFrame) {
     window.requestAnimFrame = (function requestAnimFrame() {
-        return window.requestAnimationFrame || window.webkitRequestAnimationFrame
-            || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function (callback) {
-                window.setTimeout(callback, 1000 / 60);
-            };
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                };
     })();
 }
 
