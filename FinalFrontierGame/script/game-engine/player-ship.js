@@ -12,8 +12,8 @@ var PlayerShip = (function () {
         PlayerShip.prototype.constructor = PlayerShip;
         instance = this;
         instance.update = function update() {
-            instance.move(3);
-            instance.rotate(6);
+            instance.move(instance.speed);
+            instance.rotate(instance.speed);
         }
     };
 

@@ -9,23 +9,24 @@ function startGame() {
     var foregroundDrawer = new KineticDrawer(gameField.foreground);
     var spaceObjectManager = new SpaceObjectManager(foregroundDrawer);
 
-    generateEnemy(50, 50);
+    generateWalker(400, 300);
+
     var playerShip = new PlayerShip({
         rotation: 0,
         shape: new Kinetic.Image({
-            x: 20,
-            y: 20,
+            x: 50,
+            y: 50,
             image: gameArt.playerImage,
             width: gameArt.playerImage.width,
             height: gameArt.playerImage.height,
-            speed: 2,
-            offset: {x:20, y:20}
+            speed: 5,
+            offset: {x: 20, y: 20}
         })
     });
 
     attachKeyboardControl({
         controllableObj: playerShip,
-        direction: 'direction',
+        directions: 'direction',
         rotation: 'rotation',
         objectHandler: window
     });
@@ -42,7 +43,7 @@ function startGame() {
 
     runGame();
 
-    function generateEnemy(x, y) {
+    function generateWalker(x, y) {
         spaceObjectManager.add(new Walker({
             rotation: 'rotateRight',
             rotationSpeed: 2,
@@ -52,10 +53,9 @@ function startGame() {
                 image: gameArt.enemyImage,
                 width: gameArt.enemyImage.width,
                 height: gameArt.enemyImage.height,
-                offset: {x:20, y:20},
-                speed: 2
-            }),
-            direction: 'left'
+                offset: {x: 20, y: 20},
+                speed: 1
+            })
         }));
     }
 }

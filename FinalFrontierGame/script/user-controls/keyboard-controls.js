@@ -11,30 +11,27 @@ function attachKeyboardControl(args) {
     var E_KEY = 69;
     var SHIFT = 16;
     var controllableObj = args.controllableObj;
-    var direction = args.direction;
+    var direction = args.directions;
     var rotation = args.rotation;
-    var objectHandler = args.objectHandler;
 
-    objectHandler.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', function (event) {
         event = event || window.event;
-        var newX = 0, newY = 0;
-        var speed = controllableObj.speed;
         switch (event.keyCode) {
             case LEFT_ARROW:
             case A_KEY:
-                newX -= speed;
+                controllableObj[direction].left = true;
                 break;
             case UP_ARROW:
             case W_KEY:
-                newY = -speed;
+                controllableObj[direction].up = true;
                 break;
             case RIGHT_ARROW:
             case D_KEY:
-                newX += speed;
+                controllableObj[direction].right = true;
                 break;
             case DOWN_ARROW:
             case S_KEY:
-                newY += speed;
+                controllableObj[direction].down = true;
                 break;
             case Q_KEY:
                 controllableObj[rotation] = 'rotateLeft';
@@ -43,29 +40,26 @@ function attachKeyboardControl(args) {
                 controllableObj[rotation] = 'rotateRight';
                 break;
         }
-
-        controllableObj[direction] = {x: newX, y: newY};
     });
 
-    objectHandler.addEventListener('keyup', function (event) {
+    document.addEventListener('keyup', function (event) {
         event = event || window.event;
         switch (event.keyCode) {
             case LEFT_ARROW:
             case A_KEY:
-                controllableObj[direction] = {x: 0};
+                controllableObj[direction].left = false;
                 break;
             case UP_ARROW:
             case W_KEY:
-                controllableObj[direction] = {y: 0};
+                controllableObj[direction].up = false;
                 break;
             case RIGHT_ARROW:
             case D_KEY:
-                controllableObj[direction] = {x: 0};
+                controllableObj[direction].right  = false;
                 break;
             case DOWN_ARROW:
             case S_KEY:
-                controllableObj[direction] = {y: 0};
-                break;
+                controllableObj[direction].down = false;
                 break;
             case Q_KEY:
                 controllableObj[rotation] = 'none';

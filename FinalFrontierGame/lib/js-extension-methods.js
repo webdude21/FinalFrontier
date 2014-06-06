@@ -26,3 +26,15 @@ if (!window.requestAnimFrame) {
 function randomInt(to, from) {
     return Math.floor(Math.random() * (to - from) + from);
 }
+
+if (!Array.prototype.removeAll) {
+    Array.prototype.removeAll = function (value) {
+        var resultArr = [];
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] !== value) {
+                resultArr.push(this[i]);
+            }
+        }
+        return resultArr;
+    };
+}
