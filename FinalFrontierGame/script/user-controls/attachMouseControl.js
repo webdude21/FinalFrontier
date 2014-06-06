@@ -19,7 +19,7 @@ function attachMouseControl(args) {
         var bullet = new Bullet(objPosition.x, objPosition.y, {
             x: event.layerX,
             y: event.layerY
-        });
+        }, args.controllableObj.rotation);
         
         objManager.add(bullet);
     }, false);

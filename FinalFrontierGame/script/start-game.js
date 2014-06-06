@@ -31,7 +31,7 @@ function startGame() {
         return {
             x: randomInt(objectWidth, GAME_FIELD_WIDTH - objectWidth),
             y: randomInt(objectHeight, GAME_FIELD_HEIGHT - objectHeight)
-        }
+        };
     }
 
     var walkerGeneratorID = setInterval(generateRandomWalker, 4000);

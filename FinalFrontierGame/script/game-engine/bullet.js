@@ -1,37 +1,38 @@
-function Bullet(originX, originY, target) {
+function Bullet(originX, originY, target, rotation) {
     'use strict';
     SpaceObject.call(this, {
         rotation: 0,
-        speed: 15,
+        speed: 12,
         shape: new Kinetic.Image({
             x: originX,
             y: originY,
+            rotation: rotation,
             image: GAME_ART.BULLET,
             width: GAME_ART.BULLET.width,
             height: GAME_ART.BULLET.height
         })
     });
 
-    this.target = target;
-
-    this.move = function () {
-        var directionX = this.target.x - this.getLocation().x;
-        var directionY = this.target.y - this.getLocation().y;
-
+    this.direction = (function() {
+        var directionX = target.x - originX;
+        var directionY = target.y - originY;
         var denominator = Math.sqrt(directionX * directionX + directionY * directionY);
 
-        var normalizedX = directionX / denominator;
-        var normalizedY = directionY / denominator;
+        return {
+            x: directionX / denominator,
+            y: directionY / denominator
+        };
+    }());
 
+    this.move = function () {
         this.visual.move({
-            x: normalizedX * this.speed,
-            y: normalizedY * this.speed
+            x: this.direction.x * this.speed,
+            y: this.direction.y * this.speed
         });
     };
 
     this.update = function update() {
         this.move();
-
     };
 }
 
