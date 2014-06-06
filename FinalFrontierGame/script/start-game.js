@@ -18,6 +18,7 @@ function startGame() {
             image: gameArt.playerImage,
             width: gameArt.playerImage.width,
             height: gameArt.playerImage.height,
+            speed: 2,
             offset: {x:20, y:20}
         })
     });
@@ -25,7 +26,8 @@ function startGame() {
     attachKeyboardControl({
         controllableObj: playerShip,
         direction: 'direction',
-        rotation: 'rotation'
+        rotation: 'rotation',
+        objectHandler: window
     });
 
     spaceObjectManager.add(playerShip);
@@ -41,14 +43,17 @@ function startGame() {
     runGame();
 
     function generateEnemy(x, y) {
-        spaceObjectManager.add(new SpaceObject({
-            rotation: 0,
+        spaceObjectManager.add(new Walker({
+            rotation: 'rotateRight',
+            rotationSpeed: 2,
             shape: new Kinetic.Image({
                 x: x,
                 y: y,
                 image: gameArt.enemyImage,
                 width: gameArt.enemyImage.width,
-                height: gameArt.enemyImage.height
+                height: gameArt.enemyImage.height,
+                offset: {x:20, y:20},
+                speed: 2
             }),
             direction: 'left'
         }));

@@ -1,5 +1,6 @@
 var SpaceObjectManager = (function () {
     'use strict';
+
     var instance;
     SpaceObjectManager = function (drawer) {
         if (instance) {

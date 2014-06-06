@@ -22,3 +22,7 @@ if (!window.requestAnimFrame) {
             };
     })();
 }
+
+function randomInt(to, from) {
+    return Math.floor(Math.random() * (to - from) + from);
+}
