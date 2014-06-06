@@ -14,7 +14,7 @@ function attachMouseControl(args) {
       // normal coordinate system where down
       // decreases y position
   		var xDist = mousePosition.x - objPosition.x;
-  		var yDist = -(mousePosition.y - objPosition.y);
+  		var yDist = mousePosition.y - objPosition.y;
 
   		var radians = Math.atan2(yDist, xDist);
   		var degrees = (radians * 180 / Math.PI);
