@@ -26,15 +26,14 @@ function startGame() {
 
     attachKeyboardControl({
         controllableObj: playerShip,
-        directions: 'direction',
-        rotation: 'rotation',
+        directionInterface: 'direction',
         objectHandler: window
     });
 
-    // trying to attack mouse control to ship
     attachMouseControl({
         controllableObj: playerShip,
-        objectHandler: gameField.stage
+        objectHandler: gameField.stage,
+        rotationInterface: 'rotate'
     });
 
     spaceObjectManager.add(playerShip);

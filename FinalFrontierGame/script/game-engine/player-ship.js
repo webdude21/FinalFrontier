@@ -13,8 +13,10 @@ var PlayerShip = (function () {
         instance = this;
         instance.update = function update() {
             instance.move(instance.speed);
-            //instance.rotate(instance.speed);
         };
+        instance.rotate = function rotate(angle) {
+            instance.visual.setRotationDeg(angle)
+        }
     };
 
     return PlayerShip;

@@ -11,7 +11,7 @@ function attachKeyboardControl(args) {
     var E_KEY = 69;
     var SHIFT = 16;
     var controllableObj = args.controllableObj;
-    var direction = args.directions;
+    var movementInterface = args.directionInterface;
     var rotation = args.rotation;
     var objectHandler = args.objectHandler;
 
@@ -20,19 +20,19 @@ function attachKeyboardControl(args) {
         switch (event.keyCode) {
             case LEFT_ARROW:
             case A_KEY:
-                controllableObj[direction].left = true;
+                controllableObj[movementInterface].left = true;
                 break;
             case UP_ARROW:
             case W_KEY:
-                controllableObj[direction].up = true;
+                controllableObj[movementInterface].up = true;
                 break;
             case RIGHT_ARROW:
             case D_KEY:
-                controllableObj[direction].right = true;
+                controllableObj[movementInterface].right = true;
                 break;
             case DOWN_ARROW:
             case S_KEY:
-                controllableObj[direction].down = true;
+                controllableObj[movementInterface].down = true;
                 break;
             case Q_KEY:
                 controllableObj[rotation] = 'rotateLeft';
@@ -48,19 +48,19 @@ function attachKeyboardControl(args) {
         switch (event.keyCode) {
             case LEFT_ARROW:
             case A_KEY:
-                controllableObj[direction].left = false;
+                controllableObj[movementInterface].left = false;
                 break;
             case UP_ARROW:
             case W_KEY:
-                controllableObj[direction].up = false;
+                controllableObj[movementInterface].up = false;
                 break;
             case RIGHT_ARROW:
             case D_KEY:
-                controllableObj[direction].right = false;
+                controllableObj[movementInterface].right = false;
                 break;
             case DOWN_ARROW:
             case S_KEY:
-                controllableObj[direction].down = false;
+                controllableObj[movementInterface].down = false;
                 break;
             case Q_KEY:
                 controllableObj[rotation] = 'none';
