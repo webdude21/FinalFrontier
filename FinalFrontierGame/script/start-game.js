@@ -1,7 +1,8 @@
 function startGame() {
     // initialize game variables
-    // var gameArt = new GameArt();
-    var gameField = new GameField(800, 600, 'game-window');
+    var GAME_FIELD_HEIGHT = 800;
+    var GAME_FIELD_WIDTH = 600;
+    var gameField = new GameField(GAME_FIELD_HEIGHT, GAME_FIELD_WIDTH, 'game-window');
     var backgroundDrawer = new KineticDrawer(gameField.background);
     var background = GAME_ART.BACKGROUND;
     backgroundDrawer.generateImage(0, 0, background.width, background.height, 0, background);
@@ -9,8 +10,25 @@ function startGame() {
     var foregroundDrawer = new KineticDrawer(gameField.foreground);
     var spaceObjectManager = new SpaceObjectManager(foregroundDrawer);
 
-    generateWalker(400, 300);
+    var generateRandomWalker = function () {
+        var randX = randomInt(20, GAME_FIELD_WIDTH - 20);
+        var randY = randomInt(20, GAME_FIELD_HEIGHT - 20);
+        spaceObjectManager.add(new Walker({
+            rotation: 'rotateRight',
+            rotationSpeed: 2,
+            shape: new Kinetic.Image({
+                x: randX,
+                y: randY,
+                image: GAME_ART.ENEMY,
+                width: GAME_ART.ENEMY.width,
+                height: GAME_ART.ENEMY.height,
+                speed: 1,
+                offset: {x: 20, y: 20}
+            })
+        }));
+    };
 
+    var walkerGeneratorID = setInterval(generateRandomWalker, 4000);
     var playerShip = new PlayerShip({
         rotation: 0,
         shape: new Kinetic.Image({
@@ -48,19 +66,5 @@ function startGame() {
 
     runGame();
 
-    function generateWalker(x, y) {
-        spaceObjectManager.add(new Walker({
-            rotation: 'rotateRight',
-            rotationSpeed: 2,
-            shape: new Kinetic.Image({
-                x: x,
-                y: y,
-                image: GAME_ART.ENEMY,
-                width: GAME_ART.ENEMY.width,
-                height: GAME_ART.ENEMY.height,
-                offset: {x: 20, y: 20},
-                speed: 1
-            })
-        }));
-    }
+
 }
