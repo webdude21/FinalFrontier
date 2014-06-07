@@ -23,7 +23,8 @@ var SpaceObjectManager = (function () {
             var gameInfo = {
                 xBound: drawer.canvas.canvas.width,
                 yBound: drawer.canvas.canvas.height,
-                otherObjects: instance.spaceObjects
+                otherObjects: instance.spaceObjects,
+                objectManager: instance
             };
 
             var i;

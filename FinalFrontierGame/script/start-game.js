@@ -50,15 +50,16 @@ function startGame() {
     });
 
     attachKeyboardControl({
-        controllableObj: playerShip,
         directionInterface: 'direction',
+        controllableObj: playerShip,
         objectHandler: window
     });
 
     attachMouseControl({
+        shootingInterface: 'shoot',
+        rotationInterface: 'rotate',
         controllableObj: playerShip,
-        objectHandler: gameField.stage,
-        rotationInterface: 'rotate'
+        objectHandler: gameField.stage
     });
 
     spaceObjectManager.add(playerShip);
