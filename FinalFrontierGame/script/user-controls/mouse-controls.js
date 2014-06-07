@@ -22,5 +22,6 @@ function attachMouseControl(args) {
     };
 
     objectHandler.addEventListener('mousemove', followMouseCursor, false);
+    objectHandler.addEventListener('mousedown', followMouseCursor, false);
     objectHandler.addEventListener('mousedown', fire, false);
 }

@@ -8,7 +8,8 @@ function Bullet(originX, originY, target, rotation) {
             rotation: rotation,
             image: GAME_ART.BULLET,
             width: GAME_ART.BULLET.width,
-            height: GAME_ART.BULLET.height
+            height: GAME_ART.BULLET.height,
+            offset: {x: -GAME_ART.BULLET.width / 2, y: GAME_ART.BULLET.height / 2}
         }),
         rotation: 0,
         speed: 12

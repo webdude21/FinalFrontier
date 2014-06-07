@@ -11,6 +11,13 @@ var SpaceObjectManager = (function () {
         instance.pendingObjects = [];
         instance.isUpdating = false;
         instance.spaceObjectsCount = instance.spaceObjects.length;
+        instance.gameInfo = {
+            xBound: drawer.canvas.canvas.width,
+            yBound: drawer.canvas.canvas.height,
+            otherObjects: instance.spaceObjects,
+            objectManager: instance
+        };
+
         instance.checkIfTwoObjectsCollide = function checkIfTwoObjectsCollide(firstObject, secondObject) {
             function doCollide(firstObject, secondObject) {
                 function collisionCheck(firstObject, secondObject) {
@@ -22,8 +29,10 @@ var SpaceObjectManager = (function () {
                         }
                     }
                 }
+
                 return collisionCheck(firstObject, secondObject) || collisionCheck(secondObject, firstObject);
             }
+
             return doCollide(firstObject.getLocationAndSize(), secondObject.getLocationAndSize());
         };
 
@@ -35,19 +44,13 @@ var SpaceObjectManager = (function () {
             }
             drawer.addObject(objectToAdd.visual);
         };
-        instance.update = function () {
-            var gameInfo = {
-                xBound: drawer.canvas.canvas.width,
-                yBound: drawer.canvas.canvas.height,
-                otherObjects: instance.spaceObjects,
-                objectManager: instance
-            };
 
+        instance.update = function () {
             var i;
             instance.isUpdating = true;
 
             for (i = 0; i < instance.spaceObjects.length; i++) {
-                instance.spaceObjects[i].update(gameInfo);
+                instance.spaceObjects[i].update(instance.gameInfo);
             }
 
             instance.isUpdating = false;

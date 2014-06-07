@@ -18,17 +18,18 @@ var PlayerShip = (function () {
         };
 
         instance.shoot = function shoot(target) {
+            var emitter = instance.getLocationAndSize();
+
             function checkIfIsValidTarget() {
-                var ownSizeAndLocation = instance.getLocationAndSize();
-                return ((target.x > ownSizeAndLocation.x + ownSizeAndLocation.width) ||
-                    (target.x < ownSizeAndLocation.x) ||
-                    (target.y > ownSizeAndLocation.y + ownSizeAndLocation.height) ||
-                    (target.y < ownSizeAndLocation.y))
+                return ((target.x > emitter.x + emitter.width) ||
+                    (target.x < emitter.x) ||
+                    (target.y > emitter.y + emitter.height) ||
+                    (target.y < emitter.y))
             }
 
             if (checkIfIsValidTarget()) {
-                var location = instance.getLocation();
-                instance.pendingBullet = new Bullet(location.x + 20, location.y + 20, {
+                var centerPoint = instance.getCenterPoint();
+                instance.pendingBullet = new Bullet(centerPoint.x, centerPoint.y, {
                     x: target.x,
                     y: target.y
                 }, instance.rotation);
