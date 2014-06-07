@@ -11,7 +11,7 @@ function startGame() {
     var spaceObjectManager = new SpaceObjectManager(foregroundDrawer);
 
     var generateRandomWalker = function () {
-        validPosition = generateValidPosition(GAME_ART.ENEMY.height, GAME_ART.ENEMY.width);
+        var validPosition = generateValidPosition(GAME_ART.ENEMY.height, GAME_ART.ENEMY.width);
         spaceObjectManager.add(new Walker({
             rotation: 'rotateRight',
             rotationSpeed: 2,
@@ -35,6 +35,7 @@ function startGame() {
     }
 
     var walkerGeneratorID = setInterval(generateRandomWalker, 4000);
+
     var playerShip = new PlayerShip({
         rotation: 0,
         speed: 2,
@@ -71,6 +72,4 @@ function startGame() {
     }
 
     runGame();
-
-
 }

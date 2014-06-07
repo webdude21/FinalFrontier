@@ -42,7 +42,7 @@ function SpaceObject(args) {
     this.getSize = function getSize() {
         return{
             width: this.visual.attrs.width,
-            heigth: this.visual.attrs
+            heigth: this.visual.attrs.heigth
         };
     };
 

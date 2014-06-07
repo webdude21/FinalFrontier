@@ -1,8 +1,7 @@
 function Bullet(originX, originY, target, rotation) {
     'use strict';
-    SpaceObject.call(this, {
-        rotation: 0,
-        speed: 12,
+
+    var bulletShape = {
         shape: new Kinetic.Image({
             x: originX,
             y: originY,
@@ -10,8 +9,14 @@ function Bullet(originX, originY, target, rotation) {
             image: GAME_ART.BULLET,
             width: GAME_ART.BULLET.width,
             height: GAME_ART.BULLET.height
-        })
-    });
+        }),
+        rotation: 0,
+        speed: 12
+    };
+
+    SpaceObject.call(this, bulletShape);
+    Bullet.prototype = new SpaceObject(bulletShape);
+    Bullet.prototype.constructor = Bullet;
 
     this.direction = (function () {
         var directionX = target.x - originX;
@@ -36,9 +41,3 @@ function Bullet(originX, originY, target, rotation) {
         this.checkIfExpired(gameInfo);
     };
 }
-
-Bullet.prototype = new SpaceObject();
-Bullet.prototype.constructor = Bullet;
-
-
-

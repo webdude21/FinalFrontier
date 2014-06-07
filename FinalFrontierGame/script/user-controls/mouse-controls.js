@@ -3,24 +3,26 @@ function attachMouseControl(args) {
     var objectHandler = args.objectHandler;
     var rotationInterface = args.rotationInterface;
 
-    objectHandler.addEventListener('mousemove', function (event) {
+    var followMouseCursor = function (event) {
         event = event || window.event;
         var objPosition = args.controllableObj.getCenterPoint();
         var xDist = event.layerX - objPosition.x;
         var yDist = event.layerY - objPosition.y;
         var angle = Math.atan2(yDist, xDist) * (180 / Math.PI);
         controllableObj[rotationInterface](angle);
-    }, false);
+    };
 
-    objectHandler.addEventListener('mousedown', function (event) {
+    var fire = function (event) {
         event = event || window.event;
         var objManager = new SpaceObjectManager();
-        var objPosition = args.controllableObj.getLocation();
+        var objPosition = controllableObj.getLocation();
         var bullet = new Bullet(objPosition.x, objPosition.y, {
             x: event.layerX,
             y: event.layerY
-        }, args.controllableObj.rotation);
-        
+        }, controllableObj.rotation);
         objManager.add(bullet);
-    }, false);
+    };
+
+    objectHandler.addEventListener('mousemove', followMouseCursor, false);
+    objectHandler.addEventListener('mousedown', fire, false);
 }

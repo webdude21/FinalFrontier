@@ -11,13 +11,12 @@ var PlayerShip = (function () {
         PlayerShip.prototype = new SpaceObject(args);
         PlayerShip.prototype.constructor = PlayerShip;
         instance = this;
-
         instance.update = function update() {
             instance.move(instance.speed);
         };
 
         instance.rotate = function rotate(angle) {
-            this.rotation = angle;
+            instance.rotation = angle;
             instance.visual.setRotationDeg(angle);
         };
     };
