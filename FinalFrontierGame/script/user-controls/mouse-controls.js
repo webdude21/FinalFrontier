@@ -21,7 +21,7 @@ function attachMouseControl(args) {
         controllableObj[shootingInterface](target);
     };
 
-    objectHandler.addEventListener('mousemove', followMouseCursor, false);
-    objectHandler.addEventListener('mousedown', followMouseCursor, false);
-    objectHandler.addEventListener('mousedown', fire, false);
+    objectHandler.addEventListener('mousemove', followMouseCursor);
+    objectHandler.addEventListener('mousedown', followMouseCursor);
+    objectHandler.addEventListener('mousedown', fire);
 }

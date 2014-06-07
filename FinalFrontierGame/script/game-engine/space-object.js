@@ -58,7 +58,6 @@ function SpaceObject(args) {
         }
     };
 
-
     this.update = function (gameInfo) {
         this.checkIfExpired(gameInfo);
         this.refreshProperties();
