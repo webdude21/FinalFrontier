@@ -13,7 +13,7 @@ function Bullet(originX, originY, target, rotation) {
         })
     });
 
-    this.direction = (function() {
+    this.direction = (function () {
         var directionX = target.x - originX;
         var directionY = target.y - originY;
         var denominator = Math.sqrt(directionX * directionX + directionY * directionY);
@@ -31,8 +31,9 @@ function Bullet(originX, originY, target, rotation) {
         });
     };
 
-    this.update = function update() {
+    this.update = function update(gameInfo) {
         this.move();
+        this.checkIfExpired(gameInfo);
     };
 }
 
