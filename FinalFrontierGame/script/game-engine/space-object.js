@@ -35,14 +35,27 @@ function SpaceObject(args) {
     this.getLocation = function getLocation() {
         return {
             x: this.visual.attrs.x,
-            y: this.visual.attrs.y
+            y: this.visual.attrs.y,
+            x2: this.visual.attrs.y + this.visual.attrs.width,
+            y2: this.visual.attrs.y + this.visual.attrs.width
         };
     };
 
     this.getSize = function getSize() {
         return{
             width: this.visual.attrs.width,
-            heigth: this.visual.attrs.heigth
+            height: this.visual.attrs.height
+        };
+    };
+
+    this.getLocationAndSize = function getLocationAndSize() {
+        return {
+            x: this.visual.attrs.x,
+            y: this.visual.attrs.y,
+            x2: this.visual.attrs.y + this.visual.attrs.width,
+            y2: this.visual.attrs.y + this.visual.attrs.width,
+            width: this.visual.attrs.width,
+            height: this.visual.attrs.height
         };
     };
 
@@ -57,9 +70,9 @@ function SpaceObject(args) {
         var position = this.getLocation();
         var size = this.getSize();
         if ((position.x + size.width >= gameInfo.xBound) ||
-            (position.y + size.heigth >= gameInfo.xBound) ||
+            (position.y + size.height >= gameInfo.xBound) ||
             (position.x + size.width <= 0) ||
-            (position.y + size.heigth <= 0)) {
+            (position.y + size.height <= 0)) {
             this.hasExpired = true;
         }
     };

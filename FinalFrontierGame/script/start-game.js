@@ -22,7 +22,7 @@ function startGame() {
                 image: GAME_ART.ENEMY,
                 width: GAME_ART.ENEMY.width,
                 height: GAME_ART.ENEMY.height,
-                offset: {x: 20, y: 20}
+                offset: {x: GAME_ART.ENEMY.width / 2, y: GAME_ART.ENEMY.height / 2}
             })
         }));
     };
@@ -45,7 +45,7 @@ function startGame() {
             image: GAME_ART.PLAYER_SHIP,
             width: GAME_ART.PLAYER_SHIP.width,
             height: GAME_ART.PLAYER_SHIP.height,
-            offset: {x: 20, y: 20}
+            offset: {x: GAME_ART.PLAYER_SHIP.width / 2, y: GAME_ART.PLAYER_SHIP.height / 2}
         })
     });
 

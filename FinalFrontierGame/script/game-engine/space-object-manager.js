@@ -11,6 +11,22 @@ var SpaceObjectManager = (function () {
         instance.pendingObjects = [];
         instance.isUpdating = false;
         instance.spaceObjectsCount = instance.spaceObjects.length;
+        instance.checkIfTwoObjectsCollide = function checkIfTwoObjectsCollide(firstObject, secondObject) {
+            function doCollide(firstObject, secondObject) {
+                function collisionCheck(firstObject, secondObject) {
+                    if (secondObject.x < firstObject.x + firstObject.width &&
+                        secondObject.x > firstObject.x) {
+                        if (secondObject.y < firstObject.y + firstObject.height &&
+                            secondObject.y > firstObject.y) {
+                            return true
+                        }
+                    }
+                }
+                return collisionCheck(firstObject, secondObject) || collisionCheck(secondObject, firstObject);
+            }
+            return doCollide(firstObject.getLocationAndSize(), secondObject.getLocationAndSize());
+        };
+
         instance.add = function (objectToAdd) {
             if (!instance.isUpdating) {
                 instance.spaceObjects.push(objectToAdd);
