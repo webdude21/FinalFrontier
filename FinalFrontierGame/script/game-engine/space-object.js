@@ -34,10 +34,10 @@ function SpaceObject(args) {
 
     this.getLocation = function getLocation() {
         return {
-            x: this.visual.attrs.x,
-            y: this.visual.attrs.y,
-            x2: this.visual.attrs.y + this.visual.attrs.width,
-            y2: this.visual.attrs.y + this.visual.attrs.width
+            x: this.visual.attrs.x - this.visual.attrs.offsetX,
+            y: this.visual.attrs.y - this.visual.attrs.offsetY,
+            x2: this.visual.attrs.y - this.visual.attrs.offsetX + this.visual.attrs.width,
+            y2: this.visual.attrs.y - this.visual.attrs.offsetY + this.visual.attrs.width
         };
     };
 
@@ -49,20 +49,22 @@ function SpaceObject(args) {
     };
 
     this.getLocationAndSize = function getLocationAndSize() {
+        var location = this.getLocation();
+        var size = this.getSize();
         return {
-            x: this.visual.attrs.x,
-            y: this.visual.attrs.y,
-            x2: this.visual.attrs.y + this.visual.attrs.width,
-            y2: this.visual.attrs.y + this.visual.attrs.width,
-            width: this.visual.attrs.width,
-            height: this.visual.attrs.height
+            x: location.x,
+            y: location.y,
+            x2: location.x2,
+            y2: location.y2,
+            width: size.width,
+            height: size.height
         };
     };
 
     this.getCenterPoint = function getCenterPoint() {
         return {
-            x: this.visual.attrs.x + this.visual.attrs.width / 2,
-            y: this.visual.attrs.y + this.visual.attrs.height / 2
+            x: this.visual.attrs.x,
+            y: this.visual.attrs.y
         };
     };
 

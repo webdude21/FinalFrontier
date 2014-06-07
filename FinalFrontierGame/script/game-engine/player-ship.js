@@ -28,7 +28,7 @@ var PlayerShip = (function () {
 
             if (checkIfIsValidTarget()) {
                 var location = instance.getLocation();
-                instance.pendingBullet = new Bullet(location.x, location.y, {
+                instance.pendingBullet = new Bullet(location.x + 20, location.y + 20, {
                     x: target.x,
                     y: target.y
                 }, instance.rotation);
