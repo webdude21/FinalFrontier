@@ -28,6 +28,28 @@ Walker.prototype.randomDirectionChange = function randomMove() {
         y: randomInt(-this.speed, this.speed)};
 };
 
+Walker.prototype.isHit = function isHit(objects) {
+    var thisWalker = this;
+
+    objects.forEach(function(obj) {
+        if (obj instanceof Bullet) {
+            var bulletPosition = obj.getCenterPoint();
+            var walkerPosition = thisWalker.getLocation();
+
+            var isBulletHittingWalkerOnX = bulletPosition.x >= walkerPosition.x &&
+                                            bulletPosition.x <= walkerPosition.x2;
+
+            var isBulletHittingWalkerOnY = bulletPosition.y >= walkerPosition.y &&
+                                            bulletPosition.y <= walkerPosition.y2;
+
+            if (isBulletHittingWalkerOnX && isBulletHittingWalkerOnY) {
+                thisWalker.hasExpired = true;
+                obj.hasExpired = true;
+            }
+        }
+    });
+};
+
 Walker.prototype.update = function update(gameInfo) {
     this.rotate(this.rotationSpeed);
     this.changeDirectionCounter++;
@@ -37,4 +59,5 @@ Walker.prototype.update = function update(gameInfo) {
     }
     this.move();
     this.checkIfExpired(gameInfo);
+    this.isHit(gameInfo.otherObjects);
 };

@@ -48,10 +48,6 @@ SpaceObject.prototype.move = function move(step) {
     });
 };
 
-SpaceObject.prototype.rotate = function rotate(step) {
-    this.visual.rotate(step);
-};
-
 SpaceObject.prototype.getLocation = function getLocation() {
     return {
         x: this.visual.attrs.x - this.visual.attrs.offsetX,
@@ -97,6 +93,10 @@ SpaceObject.prototype.checkIfExpired = function checkIfExpired(gameInfo) {
         (position.y + size.height <= 0)) {
         this.hasExpired = true;
     }
+};
+
+SpaceObject.prototype.rotate = function rotate(step) {
+    this.visual.rotate(step);
 };
 
 SpaceObject.prototype.update = function update(gameInfo) {

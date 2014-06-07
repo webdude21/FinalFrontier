@@ -3,8 +3,7 @@ var CHECK_THIS_BULLET;
 function Bullet(originX, originY, target, rotation) {
     'use strict';
 
-    this.target = target;
-    var bulletShape = {
+    SpaceObject.call(this, {
         shape: new Kinetic.Image({
             x: originX,
             y: originY,
@@ -16,9 +15,9 @@ function Bullet(originX, originY, target, rotation) {
         }),
         rotation: 0,
         speed: 12
-    };
+    });
 
-    SpaceObject.call(this, bulletShape);
+    this.direction = this.trajectory(originX, originY, target);
     CHECK_THIS_BULLET = this;
 
     // this.direction = 
@@ -31,9 +30,9 @@ function Bullet(originX, originY, target, rotation) {
 Bullet.prototype = Object.create(SpaceObject.prototype);
 Bullet.prototype.constructor = Bullet;
 
-Bullet.prototype.direction = function() {
-    var directionX = this.target.x - originX;
-    var directionY = this.target.y - originY;
+Bullet.prototype.trajectory = function(startX, startY, target) {
+    var directionX = target.x - startX;
+    var directionY = target.y - startY;
     var denominator = Math.sqrt(directionX * directionX + directionY * directionY);
 
     return {
