@@ -1,24 +1,24 @@
 var SpaceObjectManager = (function () {
     'use strict';
 
-    var instance;
+    var that;
     SpaceObjectManager = function (drawer) {
-        if (instance) {
-            return instance;
+        if (that) {
+            return that;
         }
-        instance = this;
-        instance.spaceObjects = [];
-        instance.pendingObjects = [];
-        instance.isUpdating = false;
-        instance.spaceObjectsCount = instance.spaceObjects.length;
-        instance.gameInfo = {
+        that = this;
+        that.spaceObjects = [];
+        that.pendingObjects = [];
+        that.isUpdating = false;
+        that.spaceObjectsCount = that.spaceObjects.length;
+        that.gameInfo = {
             xBound: drawer.canvas.canvas.width,
             yBound: drawer.canvas.canvas.height,
-            otherObjects: instance.spaceObjects,
-            objectManager: instance
+            otherObjects: that.spaceObjects,
+            objectManager: that
         };
 
-        instance.checkIfTwoObjectsCollide = function checkIfTwoObjectsCollide(firstObject, secondObject) {
+        that.checkIfTwoObjectsCollide = function checkIfTwoObjectsCollide(firstObject, secondObject) {
             function doCollide(firstObject, secondObject) {
                 function collisionCheck(firstObject, secondObject) {
                     if (secondObject.x < firstObject.x + firstObject.width &&
@@ -33,38 +33,38 @@ var SpaceObjectManager = (function () {
                 return collisionCheck(firstObject, secondObject) || collisionCheck(secondObject, firstObject);
             }
 
-            return doCollide(firstObject.getLocationAndSize(), secondObject.getLocationAndSize());
+            return doCollide(firstObject.properties, secondObject.properties);
         };
 
-        instance.add = function (objectToAdd) {
-            if (!instance.isUpdating) {
-                instance.spaceObjects.push(objectToAdd);
+        that.add = function (objectToAdd) {
+            if (!that.isUpdating) {
+                that.spaceObjects.push(objectToAdd);
             } else {
-                instance.pendingObjects.push(objectToAdd);
+                that.pendingObjects.push(objectToAdd);
             }
             drawer.addObject(objectToAdd.visual);
         };
 
-        instance.update = function () {
+        that.update = function () {
             var i;
-            instance.isUpdating = true;
+            that.isUpdating = true;
 
-            for (i = 0; i < instance.spaceObjects.length; i++) {
-                instance.spaceObjects[i].update(instance.gameInfo);
+            for (i = 0; i < that.spaceObjects.length; i++) {
+                that.spaceObjects[i].update(that.gameInfo);
             }
 
-            instance.isUpdating = false;
+            that.isUpdating = false;
 
-            for (i = 0; i < instance.pendingObjects.length; i++) {
-                instance.spaceObjects.push(instance.pendingObjects[i]);
+            for (i = 0; i < that.pendingObjects.length; i++) {
+                that.spaceObjects.push(that.pendingObjects[i]);
             }
 
-            instance.pendingObjects.clear();
+            that.pendingObjects.clear();
 
-            for (i = 0; i < instance.spaceObjects.length; i++) {
-                if (instance.spaceObjects[i].hasExpired) {
-                    instance.spaceObjects[i].visual.destroy();
-                    instance.spaceObjects.unset(instance.spaceObjects[i]);
+            for (i = 0; i < that.spaceObjects.length; i++) {
+                if (that.spaceObjects[i].hasExpired) {
+                    that.spaceObjects[i].visual.destroy();
+                    that.spaceObjects.unset(that.spaceObjects[i]);
                 }
             }
         };

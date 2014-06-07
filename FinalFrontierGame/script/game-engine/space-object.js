@@ -5,6 +5,23 @@ function SpaceObject(args) {
     this.direction = {left: false, right: false, up: false, down: false};
     this.speed = args.speed || 2;
 
+    this.refreshProperties = function refreshProperties() {
+        this.properties = {
+            x: this.visual.attrs.x - this.visual.attrs.offsetX,
+            y: this.visual.attrs.y - this.visual.attrs.offsetY,
+            x2: this.visual.attrs.y - this.visual.attrs.offsetX + this.visual.attrs.width,
+            y2: this.visual.attrs.y - this.visual.attrs.offsetY + this.visual.attrs.width,
+            width: this.visual.attrs.width,
+            height: this.visual.attrs.height,
+            centerPoint: {
+                x: this.visual.attrs.x,
+                y: this.visual.attrs.y
+            }
+        };
+    };
+
+    this.refreshProperties();
+
     this.move = function move(step) {
         var newX = 0;
         var newY = 0;
@@ -32,49 +49,11 @@ function SpaceObject(args) {
         this.visual.rotate(step);
     };
 
-    this.getLocation = function getLocation() {
-        return {
-            x: this.visual.attrs.x - this.visual.attrs.offsetX,
-            y: this.visual.attrs.y - this.visual.attrs.offsetY,
-            x2: this.visual.attrs.y - this.visual.attrs.offsetX + this.visual.attrs.width,
-            y2: this.visual.attrs.y - this.visual.attrs.offsetY + this.visual.attrs.width
-        };
-    };
-
-    this.getSize = function getSize() {
-        return{
-            width: this.visual.attrs.width,
-            height: this.visual.attrs.height
-        };
-    };
-
-    this.getLocationAndSize = function getLocationAndSize() {
-        var location = this.getLocation();
-        var size = this.getSize();
-        return {
-            x: location.x,
-            y: location.y,
-            x2: location.x2,
-            y2: location.y2,
-            width: size.width,
-            height: size.height
-        };
-    };
-
-    this.getCenterPoint = function getCenterPoint() {
-        return {
-            x: this.visual.attrs.x,
-            y: this.visual.attrs.y
-        };
-    };
-
     this.checkIfExpired = function checkIfExpired(gameInfo) {
-        var position = this.getLocation();
-        var size = this.getSize();
-        if ((position.x + size.width >= gameInfo.xBound) ||
-            (position.y + size.height >= gameInfo.xBound) ||
-            (position.x + size.width <= 0) ||
-            (position.y + size.height <= 0)) {
+        if ((this.properties.x + this.properties.width >= gameInfo.xBound) ||
+            (this.properties.y + this.properties.height >= gameInfo.xBound) ||
+            (this.properties.x + this.properties.width <= 0) ||
+            (this.properties.y + this.properties.height <= 0)) {
             this.hasExpired = true;
         }
     };
@@ -82,6 +61,7 @@ function SpaceObject(args) {
 
     this.update = function (gameInfo) {
         this.checkIfExpired(gameInfo);
+        this.refreshProperties();
     };
 
     return this;
