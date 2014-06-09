@@ -1,4 +1,5 @@
 function SpaceObject(args) {
+    this.slack = 30;
     this.visual = args.shape;
     this.hasExpired = false;
     this.rotation = args.rotation || 'none';
@@ -42,10 +43,10 @@ SpaceObject.prototype.move = function move(step) {
 };
 
 SpaceObject.prototype.checkIfExpired = function checkIfExpired(gameInfo) {
-    if ((this.properties.x + this.properties.width >= gameInfo.xBound) ||
-        (this.properties.y + this.properties.height >= gameInfo.xBound) ||
-        (this.properties.x + this.properties.width <= 0) ||
-        (this.properties.y + this.properties.height <= 0)) {
+    if ((this.properties.x - this.slack >= gameInfo.xBound) ||
+        (this.properties.y - this.slack >= gameInfo.yBound) ||
+        (this.properties.x2 + this.slack <= 0) ||
+        (this.properties.y2 + this.slack <= 0)) {
         this.hasExpired = true;
     }
 };
