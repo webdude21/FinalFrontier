@@ -7,11 +7,15 @@ function attachKeyboardControl(args) {
     var W_KEY = 87;
     var DOWN_ARROW = 40;
     var S_KEY = 83;
+    var Q_KEY = 81;
+    var E_KEY = 69;
+    var SHIFT = 16;
     var controllableObj = args.controllableObj;
     var movementInterface = args.directionInterface;
+    var rotation = args.rotation;
     var objectHandler = args.objectHandler;
 
-    var keyDownLogic = function keyDownLogic(event) {
+    objectHandler.addEventListener('keydown', function (event) {
         event = event || window.event;
         switch (event.keyCode) {
             case LEFT_ARROW:
@@ -30,10 +34,16 @@ function attachKeyboardControl(args) {
             case S_KEY:
                 controllableObj[movementInterface].down = true;
                 break;
+            case Q_KEY:
+                controllableObj[rotation] = 'rotateLeft';
+                break;
+            case E_KEY:
+                controllableObj[rotation] = 'rotateRight';
+                break;
         }
-    };
+    });
 
-    var keyUpLogic = function keyUpLogic(event) {
+    document.addEventListener('keyup', function (event) {
         event = event || window.event;
         switch (event.keyCode) {
             case LEFT_ARROW:
@@ -52,9 +62,12 @@ function attachKeyboardControl(args) {
             case S_KEY:
                 controllableObj[movementInterface].down = false;
                 break;
+            case Q_KEY:
+                controllableObj[rotation] = 'none';
+                break;
+            case E_KEY:
+                controllableObj[rotation] = 'none';
+                break;
         }
-    };
-
-    objectHandler.addEventListener('keydown', keyDownLogic);
-    objectHandler.addEventListener('keyup', keyUpLogic);
+    });
 }

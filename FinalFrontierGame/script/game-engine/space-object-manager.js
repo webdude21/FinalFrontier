@@ -1,31 +1,32 @@
 var SpaceObjectManager = (function () {
     'use strict';
 
-    var that;
+    var instance;
     SpaceObjectManager = function (drawer) {
-        if (that) {
-            return that;
+        if (instance) {
+            return instance;
         }
-        that = this;
-        that.spaceObjects = [];
-        that.pendingObjects = [];
-        that.isUpdating = false;
-        that.spaceObjectsCount = that.spaceObjects.length;
-        that.gameInfo = {
+        
+        instance = this;
+        instance.spaceObjects = [];
+        instance.pendingObjects = [];
+        instance.isUpdating = false;
+        instance.spaceObjectsCount = instance.spaceObjects.length;
+        instance.gameInfo = {
             xBound: drawer.canvas.canvas.width,
             yBound: drawer.canvas.canvas.height,
-            otherObjects: that.spaceObjects,
-            objectManager: that
+            otherObjects: instance.spaceObjects,
+            objectManager: instance
         };
 
-        that.checkIfTwoObjectsCollide = function checkIfTwoObjectsCollide(firstObject, secondObject) {
+        instance.checkIfTwoObjectsCollide = function checkIfTwoObjectsCollide(firstObject, secondObject) {
             function doCollide(firstObject, secondObject) {
                 function collisionCheck(firstObject, secondObject) {
                     if (secondObject.x < firstObject.x + firstObject.width &&
                         secondObject.x > firstObject.x) {
                         if (secondObject.y < firstObject.y + firstObject.height &&
                             secondObject.y > firstObject.y) {
-                            return true
+                            return true;
                         }
                     }
                 }
@@ -33,38 +34,38 @@ var SpaceObjectManager = (function () {
                 return collisionCheck(firstObject, secondObject) || collisionCheck(secondObject, firstObject);
             }
 
-            return doCollide(firstObject.properties, secondObject.properties);
+            return doCollide(firstObject.getLocationAndSize(), secondObject.getLocationAndSize());
         };
 
-        that.add = function (objectToAdd) {
-            if (!that.isUpdating) {
-                that.spaceObjects.push(objectToAdd);
+        instance.add = function (objectToAdd) {
+            if (!instance.isUpdating) {
+                instance.spaceObjects.push(objectToAdd);
             } else {
-                that.pendingObjects.push(objectToAdd);
+                instance.pendingObjects.push(objectToAdd);
             }
             drawer.addObject(objectToAdd.visual);
         };
 
-        that.update = function () {
+        instance.update = function () {
             var i;
-            that.isUpdating = true;
+            instance.isUpdating = true;
 
-            for (i = 0; i < that.spaceObjects.length; i++) {
-                that.spaceObjects[i].update(that.gameInfo);
+            for (i = 0; i < instance.spaceObjects.length; i++) {
+                instance.spaceObjects[i].update(instance.gameInfo);
             }
 
-            that.isUpdating = false;
+            instance.isUpdating = false;
 
-            for (i = 0; i < that.pendingObjects.length; i++) {
-                that.spaceObjects.push(that.pendingObjects[i]);
+            for (i = 0; i < instance.pendingObjects.length; i++) {
+                instance.spaceObjects.push(instance.pendingObjects[i]);
             }
 
-            that.pendingObjects.clear();
+            instance.pendingObjects.clear();
 
-            for (i = 0; i < that.spaceObjects.length; i++) {
-                if (that.spaceObjects[i].hasExpired) {
-                    that.spaceObjects[i].visual.destroy();
-                    that.spaceObjects.unset(that.spaceObjects[i]);
+            for (i = 0; i < instance.spaceObjects.length; i++) {
+                if (instance.spaceObjects[i].hasExpired) {
+                    instance.spaceObjects[i].visual.destroy();
+                    instance.spaceObjects.unset(instance.spaceObjects[i]);
                 }
             }
         };

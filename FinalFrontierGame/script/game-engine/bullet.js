@@ -1,7 +1,9 @@
+var CHECK_THIS_BULLET;
+
 function Bullet(originX, originY, target, rotation) {
     'use strict';
 
-    var bulletShape = {
+    SpaceObject.call(this, {
         shape: new Kinetic.Image({
             x: originX,
             y: originY,
@@ -13,32 +15,40 @@ function Bullet(originX, originY, target, rotation) {
         }),
         rotation: 0,
         speed: 12
-    };
+    });
 
-    SpaceObject.call(this, bulletShape);
-    Bullet.prototype = new SpaceObject(bulletShape);
-    Bullet.prototype.constructor = Bullet;
+    this.direction = this.trajectory(originX, originY, target);
+    CHECK_THIS_BULLET = this;
 
-    this.direction = (function () {
-        var directionX = target.x - originX;
-        var directionY = target.y - originY;
-        var denominator = Math.sqrt(directionX * directionX + directionY * directionY);
+    // this.direction = 
 
-        return {
-            x: directionX / denominator,
-            y: directionY / denominator
-        };
-    }());
+    // this.move = 
 
-    this.move = function () {
-        this.visual.move({
-            x: this.direction.x * this.speed,
-            y: this.direction.y * this.speed
-        });
-    };
-
-    this.update = function update(gameInfo) {
-        this.move();
-        this.checkIfExpired(gameInfo);
-    };
+    // this.update = 
 }
+
+Bullet.prototype = Object.create(SpaceObject.prototype);
+Bullet.prototype.constructor = Bullet;
+
+Bullet.prototype.trajectory = function(startX, startY, target) {
+    var directionX = target.x - startX;
+    var directionY = target.y - startY;
+    var denominator = Math.sqrt(directionX * directionX + directionY * directionY);
+
+    return {
+        x: directionX / denominator,
+        y: directionY / denominator
+    };
+};
+
+Bullet.prototype.move = function() {
+    this.visual.move({
+        x: this.direction.x * this.speed,
+        y: this.direction.y * this.speed
+    });
+};
+
+Bullet.prototype.update = function update(gameInfo) {
+    this.move();
+    this.checkIfExpired(gameInfo);
+};

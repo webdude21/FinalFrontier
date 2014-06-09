@@ -6,12 +6,12 @@ function attachMouseControl(args) {
 
     var followMouseCursor = function (event) {
         event = event || window.event;
-        var xDist = event.layerX - controllableObj.properties.centerPoint.x;
-        var yDist = event.layerY - controllableObj.properties.centerPoint.y;
+        var objPosition = args.controllableObj.getCenterPoint();
+        var xDist = event.layerX - objPosition.x;
+        var yDist = event.layerY - objPosition.y;
         var angle = Math.atan2(yDist, xDist) * (180 / Math.PI);
         controllableObj[rotationInterface](angle);
     };
-
     var fire = function (event) {
         event = event || window.event;
         var target = {
@@ -21,7 +21,7 @@ function attachMouseControl(args) {
         controllableObj[shootingInterface](target);
     };
 
-    objectHandler.addEventListener('mousemove', followMouseCursor);
-    objectHandler.addEventListener('mousedown', followMouseCursor);
-    objectHandler.addEventListener('mousedown', fire);
+    objectHandler.addEventListener('mousemove', followMouseCursor, false);
+    objectHandler.addEventListener('mousedown', followMouseCursor, false);
+    objectHandler.addEventListener('mousedown', fire, false);
 }
