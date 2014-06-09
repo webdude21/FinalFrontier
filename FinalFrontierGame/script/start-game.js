@@ -11,7 +11,7 @@ function startGame() {
     var spaceObjectManager = new SpaceObjectManager(foregroundDrawer);
 
     var generateRandomWalker = function () {
-        var validPosition = generateValidPosition(GAME_ART.ENEMY.height, GAME_ART.ENEMY.width);
+        var validPosition = generateValidPosition(GAME_ART.WALKER.height, GAME_ART.WALKER.width);
         spaceObjectManager.add(new Walker({
             rotation: 'rotateRight',
             rotationSpeed: 2,
@@ -19,11 +19,20 @@ function startGame() {
             shape: new Kinetic.Image({
                 x: validPosition.x,
                 y: validPosition.y,
-                image: GAME_ART.ENEMY,
-                width: GAME_ART.ENEMY.width,
-                height: GAME_ART.ENEMY.height,
-                offset: {x: GAME_ART.ENEMY.width / 2, y: GAME_ART.ENEMY.height / 2}
+                image: GAME_ART.WALKER,
+                width: GAME_ART.WALKER.width,
+                height: GAME_ART.WALKER.height,
+                offset: {x: GAME_ART.WALKER.width / 2, y: GAME_ART.WALKER.height / 2}
             })
+        }));
+    };
+
+    var generateRandomDrone = function () {
+        var validPosition = generateValidPosition(GAME_ART.DRONE.height, GAME_ART.DRONE.width);
+        spaceObjectManager.add(new Drone({
+            speed: 1,
+            x: validPosition.x,
+            y: validPosition.y
         }));
     };
 
@@ -35,6 +44,7 @@ function startGame() {
     }
 
     var walkerGeneratorID = setInterval(generateRandomWalker, 4000);
+    var droneGeneratorID = setInterval(generateRandomDrone, 7000);
 
     var playerShip = new PlayerShip({
         rotation: 0,
@@ -49,6 +59,9 @@ function startGame() {
         })
     });
 
+    spaceObjectManager.add(playerShip);
+    spaceObjectManager.playerShip = playerShip;
+
     attachKeyboardControl({
         directionInterface: 'direction',
         controllableObj: playerShip,
@@ -62,7 +75,6 @@ function startGame() {
         objectHandler: gameField.stage
     });
 
-    spaceObjectManager.add(playerShip);
 
     function runGame() {
         spaceObjectManager.update();

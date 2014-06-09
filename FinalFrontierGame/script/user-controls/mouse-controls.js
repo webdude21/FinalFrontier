@@ -11,6 +11,7 @@ function attachMouseControl(args) {
         var angle = Math.atan2(yDist, xDist) * (180 / Math.PI);
         controllableObj[rotationInterface](angle);
     };
+
     var fire = function (event) {
         event = event || window.event;
         var target = {

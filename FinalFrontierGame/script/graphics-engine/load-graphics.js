@@ -10,7 +10,8 @@ var GAME_ART = (function() {
     return {
         BACKGROUND: loadImg('resources/art/space-background.jpg'),
         PLAYER_SHIP: loadImg('resources/art/player-ship.png'),
-        ENEMY: loadImg('resources/art/enemy.png'),
-        BULLET: loadImg('resources/art/bullet.png')
+        WALKER: loadImg('resources/art/walker.png'),
+        BULLET: loadImg('resources/art/bullet.png'),
+        DRONE: loadImg('resources/art/drone.png')
     };
 }());
