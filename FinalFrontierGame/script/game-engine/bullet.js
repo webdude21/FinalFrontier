@@ -1,23 +1,24 @@
 var CHECK_THIS_BULLET;
 
-function Bullet(originX, originY, target, rotation) {
+function Bullet(args) {
     'use strict';
 
     SpaceObject.call(this, {
         shape: new Kinetic.Image({
-            x: originX,
-            y: originY,
-            rotation: rotation,
+            x: args.x,
+            y: args.y,
+            rotation: args.rotation,
             image: GAME_ART.BULLET,
             width: GAME_ART.BULLET.width,
             height: GAME_ART.BULLET.height,
             offset: {x: -GAME_ART.BULLET.width / 2, y: GAME_ART.BULLET.height / 2}
         }),
         rotation: 0,
-        speed: 12
+        speed: args.speed || 12,
+        shooter: args.shooter
     });
 
-    this.direction = this.trajectory(originX, originY, target);
+    this.direction = this.trajectory(args.x, args.y, args.target);
     CHECK_THIS_BULLET = this;
 }
 

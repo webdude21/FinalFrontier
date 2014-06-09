@@ -5,6 +5,7 @@ function SpaceObject(args) {
     this.rotation = args.rotation || 'none';
     this.direction = {left: false, right: false, up: false, down: false};
     this.speed = args.speed || 2;
+    this.shooter = args.shooter;
     this.properties = {
         x: this.visual.attrs.x - this.visual.attrs.offsetX,
         y: this.visual.attrs.y - this.visual.attrs.offsetY,
@@ -42,6 +43,19 @@ SpaceObject.prototype.move = function move(step) {
     });
 };
 
+SpaceObject.prototype.shoot = function shoot(target) {
+    this.pendingBullet = new Bullet({
+        x: this.properties.centerPoint.x,
+        y: this.properties.centerPoint.y,
+        speed: this.shootingRate,
+        rotation: this.rotation,
+        shooter: this,
+        target: {
+            x: target.x,
+            y: target.y
+        }});
+};
+
 SpaceObject.prototype.checkIfExpired = function checkIfExpired(gameInfo) {
     if ((this.properties.x - this.slack >= gameInfo.xBound) ||
         (this.properties.y - this.slack >= gameInfo.yBound) ||
@@ -49,6 +63,17 @@ SpaceObject.prototype.checkIfExpired = function checkIfExpired(gameInfo) {
         (this.properties.y2 + this.slack <= 0)) {
         this.hasExpired = true;
     }
+};
+
+SpaceObject.prototype.isHit = function isHit(gameInfo) {
+    gameInfo.spaceObjects.forEach(function (obj) {
+        if (obj instanceof Bullet && !(obj.shooter === this)) {
+            if (gameInfo.objectManager.checkIfTwoObjectsCollide(obj, this)) {
+                this.hasExpired = true;
+                obj.hasExpired = true;
+            }
+        }
+    }, this);
 };
 
 SpaceObject.prototype.rotate = function rotate(step) {

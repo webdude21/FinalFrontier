@@ -15,38 +15,26 @@ var PlayerShip;
         SpaceObject.call(this, args);
 
         instance = this;
+        instance.shootingRate = 12;
         CHECK_THIS_SHIP = instance;
     };
 }());
 
 PlayerShip.prototype = Object.create(SpaceObject.prototype);
 PlayerShip.prototype.constructor = PlayerShip;
+PlayerShip.prototype.shoot = SpaceObject.prototype.shoot;
+PlayerShip.prototype.isHit = SpaceObject.prototype.isHit;
+PlayerShip.prototype.checkIfExpired = SpaceObject.prototype.checkIfExpired;
 
 PlayerShip.prototype.rotate = function rotate(angle) {
     this.rotation = angle;
     this.visual.setRotationDeg(angle);
 };
 
-PlayerShip.prototype.shoot = function shoot(target) {
-    var emitter = this;
-    function checkIfIsValidTarget() {
-        return ((target.x > emitter.properties.x2) ||
-            (target.x < emitter.properties.x) ||
-            (target.y > emitter.properties.y2) ||
-            (target.y < emitter.properties.y))
-    }
-
-    if (checkIfIsValidTarget()) {
-        emitter.pendingBullet = new Bullet(emitter.properties.centerPoint.x,
-            emitter.properties.centerPoint.y, {
-                x: target.x,
-                y: target.y
-            }, emitter.rotation);
-    }
-};
-
 PlayerShip.prototype.update = function update(gameInfo) {
     this.refreshProperties();
+    this.isHit(gameInfo);
+    this.checkIfExpired(gameInfo);
     this.move(this.speed);
     if (this.pendingBullet) {
         gameInfo.objectManager.add(this.pendingBullet);

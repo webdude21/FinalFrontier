@@ -10,20 +10,25 @@ function Drone(args) {
             image: GAME_ART.DRONE,
             width: GAME_ART.DRONE.width,
             height: GAME_ART.DRONE.height,
-            offset: {x: -GAME_ART.DRONE.width / 2, y: GAME_ART.DRONE.height / 2}
+            offset: {x: GAME_ART.DRONE.width / 2, y: GAME_ART.DRONE.height / 2}
         }),
         rotation: 0,
         speed: args.speed || 2
     });
 
+    this.target = args.target;
     this.direction = {x: 0, y: 0};
+    this.shootingDelay = 100;
+    this.shootingDelayCounter = 0;
+    this.shootingRate = 2;
     CHECK_THIS_DRONE = this;
 }
 
 Drone.prototype = Object.create(SpaceObject.prototype);
 Drone.prototype.constructor = Drone;
-Drone.prototype.isHit = Walker.prototype.isHit;
+Drone.prototype.isHit = SpaceObject.prototype.isHit;
 Drone.prototype.trajectory = Bullet.prototype.trajectory;
+Drone.prototype.shoot = SpaceObject.prototype.shoot;
 
 Drone.prototype.seek = function seek(target) {
     this.direction = this.trajectory(this.properties.x, this.properties.y,
@@ -51,9 +56,18 @@ Drone.prototype.move = function move() {
 
 Drone.prototype.update = function update(gameInfo) {
     this.refreshProperties();
+    this.shootingDelayCounter++;
+    if (this.shootingDelayCounter === this.shootingDelay) {
+        this.shoot(this.target.properties);
+        this.shootingDelayCounter = 0;
+    }
+    if (this.pendingBullet) {
+        gameInfo.objectManager.add(this.pendingBullet);
+        this.pendingBullet = null;
+    }
     this.isHit(gameInfo);
     this.checkIfExpired(gameInfo);
-    this.seek(gameInfo.objectManager.playerShip);
+    this.seek(this.target);
+    this.rotateTowords(this.target);
     this.move();
-    this.rotateTowords(gameInfo.objectManager.playerShip);
 };

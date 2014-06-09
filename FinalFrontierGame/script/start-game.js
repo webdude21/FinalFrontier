@@ -10,6 +10,20 @@ function startGame() {
     var foregroundDrawer = new KineticDrawer(gameField.foreground);
     var spaceObjectManager = new SpaceObjectManager(foregroundDrawer);
 
+    var playerShip = new PlayerShip({
+        rotation: 0,
+        speed: 2,
+        shape: new Kinetic.Image({
+            x: 50,
+            y: 50,
+            image: GAME_ART.PLAYER_SHIP,
+            width: GAME_ART.PLAYER_SHIP.width,
+            height: GAME_ART.PLAYER_SHIP.height,
+            offset: {x: GAME_ART.PLAYER_SHIP.width / 2, y: GAME_ART.PLAYER_SHIP.height / 2}
+        })
+    });
+
+
     var generateRandomWalker = function () {
         var validPosition = generateValidPosition(GAME_ART.WALKER.height, GAME_ART.WALKER.width);
         spaceObjectManager.add(new Walker({
@@ -31,6 +45,7 @@ function startGame() {
         var validPosition = generateValidPosition(GAME_ART.DRONE.height, GAME_ART.DRONE.width);
         spaceObjectManager.add(new Drone({
             speed: 1,
+            target: playerShip,
             x: validPosition.x,
             y: validPosition.y
         }));
@@ -45,19 +60,6 @@ function startGame() {
 
     var walkerGeneratorID = setInterval(generateRandomWalker, 4000);
     var droneGeneratorID = setInterval(generateRandomDrone, 7000);
-
-    var playerShip = new PlayerShip({
-        rotation: 0,
-        speed: 2,
-        shape: new Kinetic.Image({
-            x: 50,
-            y: 50,
-            image: GAME_ART.PLAYER_SHIP,
-            width: GAME_ART.PLAYER_SHIP.width,
-            height: GAME_ART.PLAYER_SHIP.height,
-            offset: {x: GAME_ART.PLAYER_SHIP.width / 2, y: GAME_ART.PLAYER_SHIP.height / 2}
-        })
-    });
 
     spaceObjectManager.add(playerShip);
     spaceObjectManager.playerShip = playerShip;
