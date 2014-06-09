@@ -2,17 +2,10 @@ var CHECK_THIS_WALKER;
 
 function Walker(args) {
     SpaceObject.call(this, args);
-    
     this.rotationSpeed = args.rotationSpeed || 5;
     this.changeDirectionCounter = 0;
     this.direction = {x: 0, y: 0};
-
     CHECK_THIS_WALKER = this;
-    // this.move = 
-
-    // this.randomDirectionChange = 
-
-    // this.update = 
 }
 
 Walker.prototype = Object.create(SpaceObject.prototype);
@@ -28,26 +21,16 @@ Walker.prototype.randomDirectionChange = function randomMove() {
         y: randomInt(-this.speed, this.speed)};
 };
 
-Walker.prototype.isHit = function isHit(objects) {
+Walker.prototype.isHit = function isHit(gameInfo) {
     var thisWalker = this;
-
-    objects.forEach(function(obj) {
+    gameInfo.spaceObjects.forEach(function (obj) {
         if (obj instanceof Bullet) {
-            var bulletPosition = obj.getCenterPoint();
-            var walkerPosition = thisWalker.getLocation();
-
-            var isBulletHittingWalkerOnX = bulletPosition.x >= walkerPosition.x &&
-                                            bulletPosition.x <= walkerPosition.x2;
-
-            var isBulletHittingWalkerOnY = bulletPosition.y >= walkerPosition.y &&
-                                            bulletPosition.y <= walkerPosition.y2;
-
-            if (isBulletHittingWalkerOnX && isBulletHittingWalkerOnY) {
+            if (gameInfo.objectManager.checkIfTwoObjectsCollide(obj, thisWalker)) {
                 thisWalker.hasExpired = true;
                 obj.hasExpired = true;
             }
         }
-    });
+    }, this);
 };
 
 Walker.prototype.update = function update(gameInfo) {
@@ -58,6 +41,7 @@ Walker.prototype.update = function update(gameInfo) {
         this.changeDirectionCounter = 0;
     }
     this.move();
+    this.refreshProperties();
+    this.isHit(gameInfo);
     this.checkIfExpired(gameInfo);
-    this.isHit(gameInfo.otherObjects);
 };

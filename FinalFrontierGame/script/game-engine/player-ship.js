@@ -2,7 +2,7 @@ var CHECK_THIS_SHIP;
 
 var PlayerShip;
 
-(function() {
+(function () {
     'use strict';
 
     var instance;
@@ -17,21 +17,6 @@ var PlayerShip;
         instance = this;
         CHECK_THIS_SHIP = instance;
     };
-
-    
-    // this.instance = this;
-    // PlayerShip = function (args) {
-    //     if (instance) {
-    //         return instance;
-    //     }
-    
-
-    // instance.rotate = 
-    // instance.shoot = 
-
-    // instance.update = 
-
-    // return PlayerShip;
 }());
 
 PlayerShip.prototype = Object.create(SpaceObject.prototype);
@@ -43,25 +28,25 @@ PlayerShip.prototype.rotate = function rotate(angle) {
 };
 
 PlayerShip.prototype.shoot = function shoot(target) {
-    var emitter = this.getLocationAndSize();
-
+    var emitter = this;
     function checkIfIsValidTarget() {
-        return ((target.x > emitter.x + emitter.width) ||
-            (target.x < emitter.x) ||
-            (target.y > emitter.y + emitter.height) ||
-            (target.y < emitter.y));
+        return ((target.x > emitter.properties.x2) ||
+            (target.x < emitter.properties.x) ||
+            (target.y > emitter.properties.y2) ||
+            (target.y < emitter.properties.y))
     }
 
     if (checkIfIsValidTarget()) {
-        var centerPoint = this.getCenterPoint();
-        this.pendingBullet = new Bullet(centerPoint.x, centerPoint.y, {
-            x: target.x,
-            y: target.y
-        }, this.rotation);
+        emitter.pendingBullet = new Bullet(emitter.properties.centerPoint.x,
+            emitter.properties.centerPoint.y, {
+                x: target.x,
+                y: target.y
+            }, emitter.rotation);
     }
 };
 
 PlayerShip.prototype.update = function update(gameInfo) {
+    this.refreshProperties();
     this.move(this.speed);
     if (this.pendingBullet) {
         gameInfo.objectManager.add(this.pendingBullet);

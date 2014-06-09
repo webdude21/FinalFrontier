@@ -15,7 +15,7 @@ var SpaceObjectManager = (function () {
         instance.gameInfo = {
             xBound: drawer.canvas.canvas.width,
             yBound: drawer.canvas.canvas.height,
-            otherObjects: instance.spaceObjects,
+            spaceObjects: instance.spaceObjects,
             objectManager: instance
         };
 
@@ -26,15 +26,14 @@ var SpaceObjectManager = (function () {
                         secondObject.x > firstObject.x) {
                         if (secondObject.y < firstObject.y + firstObject.height &&
                             secondObject.y > firstObject.y) {
-                            return true;
+                            return true
                         }
                     }
                 }
-
                 return collisionCheck(firstObject, secondObject) || collisionCheck(secondObject, firstObject);
             }
 
-            return doCollide(firstObject.getLocationAndSize(), secondObject.getLocationAndSize());
+            return doCollide(firstObject.properties, secondObject.properties);
         };
 
         instance.add = function (objectToAdd) {
