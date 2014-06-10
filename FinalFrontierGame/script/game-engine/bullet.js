@@ -1,16 +1,18 @@
 var CHECK_THIS_BULLET;
 
-function Bullet(args) {
+function Bullet(args, bulletImage) {
     'use strict';
+
+    bulletImage = bulletImage || GAME_ART.BULLET;
 
     SpaceObject.call(this, {
         shape: new Kinetic.Image({
             x: args.x,
             y: args.y,
             rotation: args.rotation,
-            image: GAME_ART.BULLET,
-            width: GAME_ART.BULLET.width,
-            height: GAME_ART.BULLET.height,
+            image: bulletImage,
+            width: bulletImage.width,
+            height: bulletImage.height,
             offset: {x: -GAME_ART.BULLET.width / 2, y: GAME_ART.BULLET.height / 2}
         }),
         rotation: 0,

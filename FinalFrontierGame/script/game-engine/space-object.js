@@ -17,7 +17,7 @@ function SpaceObject(args) {
             x: this.visual.attrs.x - this.visual.attrs.offsetX + this.visual.attrs.width / 2,
             y: this.visual.attrs.y - this.visual.attrs.offsetY + this.visual.attrs.height / 2
         }
-    }
+    };
 }
 
 SpaceObject.prototype.move = function move(step) {

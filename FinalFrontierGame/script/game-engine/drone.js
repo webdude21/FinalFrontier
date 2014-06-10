@@ -31,11 +31,22 @@ Drone.prototype = Object.create(SpaceObject.prototype);
 Drone.prototype.constructor = Drone;
 Drone.prototype.isHit = SpaceObject.prototype.isHit;
 Drone.prototype.trajectory = Bullet.prototype.trajectory;
-Drone.prototype.shoot = SpaceObject.prototype.shoot;
+Drone.prototype.shoot = function shoot(target) {
+    this.pendingBullet = new Bullet({
+        x: this.properties.centerPoint.x,
+        y: this.properties.centerPoint.y,
+        speed: this.shootingRate,
+        rotation: this.rotation,
+        shooter: this,
+        target: {
+            x: target.x,
+            y: target.y
+        }}, GAME_ART.DRONE_BULLET);
+};
 
 Drone.prototype.seek = function seek(target) {
     this.direction = this.trajectory(this.properties.x, this.properties.y,
-        target.properties)
+        target.properties);
 };
 
 Drone.prototype.rotateTowords = function rotateTowordsPlayer(target) {

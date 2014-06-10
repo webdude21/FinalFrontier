@@ -12,6 +12,7 @@ var GAME_ART = (function() {
         PLAYER_SHIP: loadImg('resources/art/player-ship.png'),
         WALKER: loadImg('resources/art/walker.png'),
         BULLET: loadImg('resources/art/bullet.png'),
-        DRONE: loadImg('resources/art/drone.png')
+        DRONE: loadImg('resources/art/drone.png'),
+        DRONE_BULLET: loadImg('resources/art/drone-bullet.png')
     };
 }());
