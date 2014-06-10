@@ -21,26 +21,52 @@ function SpaceObject(args) {
 }
 
 SpaceObject.prototype.move = function move(step) {
-    var newX = 0;
-    var newY = 0;
+    var newX = 0,
+        newY = 0;
 
     if (this.direction.left) {
         newX -= step;
+
+        if (this.properties.centerPoint.x - step < 0) {
+            this.changeHorizontalPostion(GAME_FIELD_WIDTH);
+        }
     }
     if (this.direction.right) {
         newX += step;
+
+        if (this.properties.centerPoint.x + step > GAME_FIELD_WIDTH) {
+            this.changeHorizontalPostion(0);
+        }
     }
     if (this.direction.up) {
         newY -= step;
+
+        if (this.properties.centerPoint.y - step < 0) {
+            this.changeVerticalPostion(GAME_FIELD_HEIGHT);
+        }
     }
     if (this.direction.down) {
         newY += step;
+
+        if (this.properties.centerPoint.y + step > GAME_FIELD_HEIGHT) {
+            this.changeVerticalPostion(0);
+        }
     }
 
     this.visual.move({
         x: newX,
         y: newY
     });
+};
+
+SpaceObject.prototype.changeHorizontalPostion = function changeX(newX) {
+    this.visual.attrs.x = newX; 
+    this.visual.attrs.y = GAME_FIELD_HEIGHT - this.properties.y;
+};
+
+SpaceObject.prototype.changeVerticalPostion = function changeY(newY) {
+    this.visual.attrs.x = GAME_FIELD_WIDTH - this.properties.centerPoint.x; 
+    this.visual.attrs.y = newY;
 };
 
 SpaceObject.prototype.shoot = function shoot(target) {

@@ -1,8 +1,9 @@
+var GAME_FIELD_WIDTH = 800,
+    GAME_FIELD_HEIGHT = 600;
+
 function startGame() {
     // initialize game variables
-    var GAME_FIELD_HEIGHT = 800;
-    var GAME_FIELD_WIDTH = 600;
-    var gameField = new GameField(GAME_FIELD_HEIGHT, GAME_FIELD_WIDTH, 'game-window');
+    var gameField = new GameField(GAME_FIELD_WIDTH, GAME_FIELD_HEIGHT, 'game-window');
     var backgroundDrawer = new KineticDrawer(gameField.background);
     var background = GAME_ART.BACKGROUND;
     backgroundDrawer.generateImage(0, 0, background.width, background.height, 0, background);
@@ -12,7 +13,7 @@ function startGame() {
 
     var playerShip = new PlayerShip({
         rotation: 0,
-        speed: 2,
+        speed: 4,
         shape: new Kinetic.Image({
             x: 50,
             y: 50,
