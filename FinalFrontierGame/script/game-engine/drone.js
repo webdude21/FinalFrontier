@@ -10,7 +10,8 @@ function Drone(args) {
             image: GAME_ART.DRONE,
             width: GAME_ART.DRONE.width,
             height: GAME_ART.DRONE.height,
-            offset: {x: GAME_ART.DRONE.width / 2, y: GAME_ART.DRONE.height / 2}
+            offset: {x: GAME_ART.DRONE.width / 2, y: GAME_ART.DRONE.height / 2},
+            opacity: 0
         }),
         rotation: 0,
         speed: args.speed || 2
@@ -21,6 +22,8 @@ function Drone(args) {
     this.shootingDelay = 100;
     this.shootingDelayCounter = 0;
     this.shootingRate = 2;
+    this.fadeInTime = 100;
+    this.startOpacity = 0;
     CHECK_THIS_DRONE = this;
 }
 
@@ -55,19 +58,25 @@ Drone.prototype.move = function move() {
 };
 
 Drone.prototype.update = function update(gameInfo) {
-    this.refreshProperties();
-    this.shootingDelayCounter++;
-    if (this.shootingDelayCounter === this.shootingDelay) {
-        this.shoot(this.target.properties);
-        this.shootingDelayCounter = 0;
+    if (this.fadeInTime > 0) {
+        this.fadeInTime -= 1;
+        this.startOpacity += 0.012;
+        this.visual.opacity(this.startOpacity);
+    } else {
+        this.refreshProperties();
+        this.shootingDelayCounter++;
+        if (this.shootingDelayCounter === this.shootingDelay) {
+            this.shoot(this.target.properties);
+            this.shootingDelayCounter = 0;
+        }
+        if (this.pendingBullet) {
+            gameInfo.objectManager.add(this.pendingBullet);
+            this.pendingBullet = null;
+        }
+        this.isHit(gameInfo);
+        this.checkIfExpired(gameInfo);
+        this.seek(this.target);
+        this.rotateTowords(this.target);
+        this.move();
     }
-    if (this.pendingBullet) {
-        gameInfo.objectManager.add(this.pendingBullet);
-        this.pendingBullet = null;
-    }
-    this.isHit(gameInfo);
-    this.checkIfExpired(gameInfo);
-    this.seek(this.target);
-    this.rotateTowords(this.target);
-    this.move();
 };
