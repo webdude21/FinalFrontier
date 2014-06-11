@@ -6,7 +6,7 @@ var SpaceObjectManager = (function () {
         if (instance) {
             return instance;
         }
-        
+
         instance = this;
         instance.spaceObjects = [];
         instance.pendingObjects = [];
@@ -30,6 +30,7 @@ var SpaceObjectManager = (function () {
                         }
                     }
                 }
+
                 return collisionCheck(firstObject, secondObject) || collisionCheck(secondObject, firstObject);
             }
 

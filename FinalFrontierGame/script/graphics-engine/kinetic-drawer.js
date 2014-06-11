@@ -3,6 +3,8 @@ var KineticDrawer = (function () {
 
     KineticDrawer = function (canvas) {
         this.canvas = canvas;
+        this.width = this.canvas.width;
+        this.height = this.canvas.height;
         this.clear = function () {
             this.canvas.clear(0, 0, canvas.width, canvas.height);
         };

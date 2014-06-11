@@ -5,6 +5,12 @@ function Walker(args) {
     this.rotationSpeed = args.rotationSpeed || 5;
     this.shootingDelay = 0;
     this.direction = {x: 0, y: 0};
+    this.shrinkRate = 0.03;
+    this.visual.scale({
+        x: 1.5,
+        y: 1.5
+    });
+
     CHECK_THIS_WALKER = this;
 }
 
@@ -22,7 +28,25 @@ Walker.prototype.randomDirectionChange = function randomMove() {
         y: randomInt(-this.speed, this.speed)};
 };
 
+Walker.prototype.walkIn = function walkIn() {
+    var currentScale = this.visual.scaleX();
+    if (currentScale > 1) {
+        var newScale = currentScale - this.shrinkRate;
+        this.visual.scale({
+            x: newScale,
+            y: newScale
+        })
+    }
+    else{
+        this.hasSpawned = true;
+    }
+};
+
 Walker.prototype.update = function update(gameInfo) {
+    if (!this.hasSpawned){
+        this.walkIn();
+    }
+
     this.rotate(this.rotationSpeed);
     this.shootingDelay++;
     if (this.shootingDelay === 100) {

@@ -11,7 +11,7 @@ function Drone(args) {
             width: GAME_ART.DRONE.width,
             height: GAME_ART.DRONE.height,
             offset: {x: GAME_ART.DRONE.width / 2, y: GAME_ART.DRONE.height / 2},
-            opacity: 0
+            opacity: 0,
         }),
         rotation: 0,
         speed: args.speed || 2
