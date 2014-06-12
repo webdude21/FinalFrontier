@@ -68,11 +68,22 @@ Drone.prototype.move = function move() {
     });
 };
 
-Drone.prototype.update = function update(gameInfo) {
+Drone.prototype.spawn = function spawn() {
     if (this.fadeInTime > 0) {
         this.fadeInTime -= 1;
         this.startOpacity += 0.012;
         this.visual.opacity(this.startOpacity);
+    } else {
+        this.hasSpawned = true;
+        if (this.spawnSound) {
+            this.spawnSound();
+        }
+    }
+};
+
+Drone.prototype.update = function update(gameInfo) {
+    if (!this.hasSpawned) {
+        this.spawn();
     } else {
         this.refreshProperties();
         this.shootingDelayCounter++;

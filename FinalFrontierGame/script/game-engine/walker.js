@@ -28,7 +28,7 @@ Walker.prototype.randomDirectionChange = function randomMove() {
         y: randomInt(-this.speed, this.speed)};
 };
 
-Walker.prototype.walkIn = function walkIn() {
+Walker.prototype.spawn = function walkIn() {
     var currentScale = this.visual.scaleX();
     if (currentScale > 1) {
         var newScale = currentScale - this.shrinkRate;
@@ -39,12 +39,15 @@ Walker.prototype.walkIn = function walkIn() {
     }
     else{
         this.hasSpawned = true;
+        if (this.spawnSound){
+            this.spawnSound();
+        }
     }
 };
 
 Walker.prototype.update = function update(gameInfo) {
     if (!this.hasSpawned){
-        this.walkIn();
+        this.spawn();
     }
 
     this.rotate(this.rotationSpeed);

@@ -60,12 +60,12 @@ SpaceObject.prototype.move = function move(step) {
 };
 
 SpaceObject.prototype.changeHorizontalPostion = function changeX(newX) {
-    this.visual.attrs.x = newX; 
+    this.visual.attrs.x = newX;
     this.visual.attrs.y = GAME_FIELD_HEIGHT - this.properties.y;
 };
 
 SpaceObject.prototype.changeVerticalPostion = function changeY(newY) {
-    this.visual.attrs.x = GAME_FIELD_WIDTH - this.properties.centerPoint.x; 
+    this.visual.attrs.x = GAME_FIELD_WIDTH - this.properties.centerPoint.x;
     this.visual.attrs.y = newY;
 };
 
@@ -97,6 +97,9 @@ SpaceObject.prototype.isHit = function isHit(gameInfo) {
             if (gameInfo.objectManager.checkIfTwoObjectsCollide(obj, this)) {
                 this.hasExpired = true;
                 obj.hasExpired = true;
+                if (this.deathSound) {
+                    this.deathSound();
+                }
             }
         }
     }, this);

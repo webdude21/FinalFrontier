@@ -37,6 +37,9 @@ PlayerShip.prototype.update = function update(gameInfo) {
     this.checkIfExpired(gameInfo);
     this.move(this.speed);
     if (this.pendingBullet) {
+        if (this.shotSound) {
+            this.shotSound();
+        }
         gameInfo.objectManager.add(this.pendingBullet);
         this.pendingBullet = null;
     }
