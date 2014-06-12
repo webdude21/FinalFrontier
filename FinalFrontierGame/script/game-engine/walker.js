@@ -24,8 +24,8 @@ Walker.prototype.move = function move() {
 
 Walker.prototype.randomDirectionChange = function randomMove() {
     this.direction = {
-        x: randomInt(-this.speed, this.speed),
-        y: randomInt(-this.speed, this.speed)};
+        x: getRandom(-this.speed, this.speed),
+        y: getRandom(-this.speed, this.speed)};
 };
 
 Walker.prototype.spawn = function walkIn() {
@@ -37,16 +37,16 @@ Walker.prototype.spawn = function walkIn() {
             y: newScale
         })
     }
-    else{
+    else {
         this.hasSpawned = true;
-        if (this.spawnSound){
+        if (this.spawnSound) {
             this.spawnSound();
         }
     }
 };
 
 Walker.prototype.update = function update(gameInfo) {
-    if (!this.hasSpawned){
+    if (!this.hasSpawned) {
         this.spawn();
     }
 

@@ -1,52 +1,35 @@
-//function Explosion(container, center, count) {
-//    var i = 0,
-//        c = container;
+//function explode(layer) {
+//    var nodes = layer.getChildren();
+//    var innerArr = [];
+//    for (var i = 0; i < nodes.length; i++) {
 //
-//    count = count || 0;
+//        var tween = new Kinetic.Tween({
+//            node: nodes[i],
+//            x: getRandom(200, -200),
+//            y: getRandom(200, -200),
+//            opacity: 0,
+//            duration: 0.5,
+//            onFinish: function () {
 //
-//    this.particles = [];
+//                var index = String(this.node.getId()).split("_");
 //
-//    this.center = {
-//        x: center.x || 0,
-//        y: center.y || 0
-//    };
+//                if (Number(index[1]) % 100 == 0) {
+//                    isExploding = false;
+//                }
+//            }
+//        });
 //
-//    // Initialization
-//    for (; i < count; ++i) {
-//        var x = this.center.x,
-//            y = this.center.y,
-//            vx = Math.random() * 3 - 1.5,
-//            vy = Math.random() * 3 - 1.5;
-//
-//        this.particles.push(new Particle(x, y, vx, vy));
+//        innerArr.push(tween);
 //    }
 //
-//    this.update = function () {
-//        for (i = 0; i < count; ++i) {
+//    tweenArr.push(innerArr);
+//}
 //
-//            // We don't want to process particles that
-//            // we can't see anymore
-//            if (this.particles[i].x > 0 &&
-//                this.particles[i].x < container.width &&
-//                this.particles[i].y > 0 &&
-//                this.particles[i].y < container.height) {
+//function enableExplode(layer, index) {
+//    isExploding = true;
+//    var nodes = layer.getChildren();
 //
-//                this.particles[i].update();
-//
-//                c.addObject(new Kinetic.Rect({
-//                    x: this.particles[i].x,
-//                    y: this.particles[i].y,
-//                    width: 5,
-//                    height: 5,
-//                    fill: 'red',
-//                    stroke: 'black',
-//                    strokeWidth: 1
-//                }));
-//
-//            } else {
-//                this.particles[i].x = this.center.x;
-//                this.particles[i].y = this.center.y;
-//            }
-//        }
-//    };
+//    for (var i = 0; i < nodes.length; i++) {
+//        tweenArr[index][i].play();
+//    }
 //}

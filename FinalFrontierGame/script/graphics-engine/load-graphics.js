@@ -13,6 +13,7 @@ var GAME_ART = (function() {
         WALKER: loadImg('resources/art/walker.png'),
         BULLET: loadImg('resources/art/bullet.png'),
         DRONE: loadImg('resources/art/drone.png'),
-        DRONE_BULLET: loadImg('resources/art/drone-bullet.png')
+        DRONE_BULLET: loadImg('resources/art/drone-bullet.png'),
+        EXPLOSION: loadImg(resources/art/explosion.png)
     };
 }());

@@ -56,8 +56,8 @@ function startGame() {
 
     function generateValidPosition(objectHeight, objectWidth) {
         return {
-            x: randomInt(objectWidth, GAME_FIELD_WIDTH - objectWidth),
-            y: randomInt(objectHeight, GAME_FIELD_HEIGHT - objectHeight)
+            x: getRandom(objectWidth, GAME_FIELD_WIDTH - objectWidth),
+            y: getRandom(objectHeight, GAME_FIELD_HEIGHT - objectHeight)
         };
     }
 
