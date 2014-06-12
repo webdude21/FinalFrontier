@@ -20,6 +20,16 @@ function SpaceObject(args) {
     };
 }
 
+SpaceObject.prototype.explode = function explode(drawer){
+    var explosion = generateExplosion(this.properties.x, this.properties.y, 20);
+    drawer.addObject(explosion);
+    explosion.start();
+    var destroyExplosion = function(){
+        explosion.destroy();
+    };
+    window.setTimeout(destroyExplosion, 400);
+};
+
 SpaceObject.prototype.move = function move(step) {
     var newX = 0,
         newY = 0;
@@ -100,6 +110,7 @@ SpaceObject.prototype.isHit = function isHit(gameInfo) {
                 if (this.deathSound) {
                     this.deathSound();
                 }
+                this.explode(gameInfo.drawer);
             }
         }
     }, this);
