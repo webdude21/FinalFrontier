@@ -15,6 +15,7 @@ function startGame() {
 
     enemyGenerationInit(spaceObjectManager, playerShip);
     attachControls(playerShip, gameField);
+    setLevelUpInterval(60000);
 
     function runGame() {
         spaceObjectManager.update();

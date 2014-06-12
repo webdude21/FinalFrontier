@@ -60,7 +60,7 @@ PlayerShip.prototype.getLives = function getLives() {
 };
 
 PlayerShip.prototype.increaseScore = function increaseScore() {
-    this.score += this.scoreIncreaseRate;
+    this.score += this.scoreIncreaseRate * FINAL_FRONTIER_LEVEL;
 };
 
 PlayerShip.prototype.reSpawn = function reSpawn() {

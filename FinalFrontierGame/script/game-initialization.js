@@ -1,3 +1,5 @@
+var FINAL_FRONTIER_LEVEL = 1;
+
 function getPlayer() {
     return new PlayerShip({
         rotation: 0,
@@ -30,8 +32,8 @@ function getRandomWalkerGenerator(spaceObjectManager) {
         var validPosition = generateValidPosition(GAME_ART.WALKER.height, GAME_ART.WALKER.width);
         spaceObjectManager.add(new Walker({
             rotation: 'rotateRight',
-            rotationSpeed: 2,
-            speed: 2,
+            rotationSpeed: 2 * FINAL_FRONTIER_LEVEL,
+            speed: 2 * FINAL_FRONTIER_LEVEL,
             shape: new Kinetic.Image({
                 x: validPosition.x,
                 y: validPosition.y,
@@ -48,7 +50,7 @@ function getRandomDroneGenerator(spaceObjectManager, playerShip) {
     return function randomDroneGenerator() {
         var validPosition = generateValidPosition(GAME_ART.DRONE.height, GAME_ART.DRONE.width);
         spaceObjectManager.add(new Drone({
-            speed: 1,
+            speed: FINAL_FRONTIER_LEVEL,
             target: playerShip,
             x: validPosition.x,
             y: validPosition.y
@@ -90,4 +92,10 @@ function setBackground(gameField) {
     var background = GAME_ART.BACKGROUND;
     backgroundDrawer.generateImage(0, 0, background.width, background.height, 0, background);
     backgroundDrawer.drawAll();
+}
+
+function setLevelUpInterval(interval){
+    setInterval(function () {
+        FINAL_FRONTIER_LEVEL++;
+    }, interval);
 }
