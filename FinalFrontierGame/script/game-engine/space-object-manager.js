@@ -63,7 +63,8 @@ var SpaceObjectManager = (function () {
             instance.pendingObjects.clear();
 
             for (i = 0; i < instance.spaceObjects.length; i++) {
-                if (instance.spaceObjects[i].hasExpired) {
+                if (instance.spaceObjects[i].hasExpired &&
+                        !(instance.spaceObjects[i] instanceof PlayerShip)) {
                     instance.spaceObjects[i].visual.destroy();
                     instance.spaceObjects.unset(instance.spaceObjects[i]);
                 }

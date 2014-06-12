@@ -61,11 +61,13 @@ PlayerShip.prototype.getLives = function getLives() {
 PlayerShip.prototype.respawn = function respawn() {
     if (this.respawnTime == 120) {
         this.visual.opacity(this.respawnOpacity);
-        this.changeHorizontalPostion(GAME_FIELD_WIDTH / 2);
-        this.changeVerticalPostion(GAME_FIELD_HEIGHT / 2);
+        this.visual.attrs.x = GAME_FIELD_WIDTH / 2;
+        this.visual.attrs.y = GAME_FIELD_HEIGHT / 2;
         this.lives -= 1;
         this.respawnTime -= 1;
     } else if (this.respawnTime > 0) {
+        this.move(this.speed);
+        this.refreshProperties();
         this.respawnOpacity += 0.012;
         this.visual.opacity(this.respawnOpacity);
         this.respawnTime -= 1;
