@@ -1,5 +1,5 @@
 function soundInit() {
-    createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashPlugin]);
+    createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin, createjs.WebAudioPlugin, createjs.FlashPlugin]);
     createjs.Sound.registerSound({src: 'resources/music/come-and-find-me.mp3', id: 'backgroundMusic'});
     createjs.Sound.registerSound({src: 'resources/sound/shot.mp3', id: 'shot'});
     createjs.Sound.registerSound({src: 'resources/sound/death.mp3', id: 'death'});
