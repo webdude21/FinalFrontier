@@ -22,8 +22,8 @@ function getStatistics(gameField, playerShip) {
         fontFamily: 'Arial',
         fontWeight: 'bold',
         fillColor: '#FFCC99',
-        x: 15,
-        y: 15
+        x: 10,
+        y: 10
     });
 }
 
@@ -97,7 +97,7 @@ function setBackground(gameField) {
 }
 
 function setLevelUpInterval(interval) {
-    setInterval(function () {
+    return setInterval(function () {
         FINAL_FRONTIER_LEVEL++;
     }, interval);
 }
