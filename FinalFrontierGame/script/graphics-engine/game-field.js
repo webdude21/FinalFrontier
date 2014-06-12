@@ -12,14 +12,17 @@ var GameField = (function () {
             width: width,
             height: height
         });
+
         instance.addNewLayer = function () {
             var newLayer = new Kinetic.Layer({});
             instance.stage.add(newLayer);
             return newLayer;
         };
-        instance.foreground = instance.addNewLayer();
+        
         instance.background = instance.addNewLayer();
-        instance.foreground.moveToTop();
+        instance.statistics = instance.addNewLayer();
+        instance.foreground = instance.addNewLayer();        
+        // instance.foreground.moveToTop();
     };
     return GameField;
 }());

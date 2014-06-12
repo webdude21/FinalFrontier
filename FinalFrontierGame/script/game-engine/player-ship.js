@@ -16,6 +16,8 @@ var PlayerShip;
 
         instance = this;
         instance.shootingRate = 12;
+        instance.lives = 3;
+        instance.score = 10;
         CHECK_THIS_SHIP = instance;
     };
 }());
@@ -43,4 +45,12 @@ PlayerShip.prototype.update = function update(gameInfo) {
         gameInfo.objectManager.add(this.pendingBullet);
         this.pendingBullet = null;
     }
+};
+
+PlayerShip.prototype.getLives = function getLives() {
+    return this.lives;
+};
+
+PlayerShip.prototype.getScore = function getScore() {
+    return this.score;
 };

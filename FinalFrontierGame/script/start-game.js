@@ -25,6 +25,8 @@ function startGame() {
         })
     });
 
+    var statistics = STATS_MANAGER(gameField.statistics, playerShip);
+
     var generateRandomWalker = function () {
         var validPosition = generateValidPosition(GAME_ART.WALKER.height, GAME_ART.WALKER.width);
         spaceObjectManager.add(new Walker({
@@ -81,6 +83,7 @@ function startGame() {
     function runGame() {
         spaceObjectManager.update();
         foregroundDrawer.drawAll();
+        statistics.update();
         window.requestAnimFrame(function () {
             runGame();
         });
