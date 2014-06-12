@@ -27,7 +27,7 @@ SpaceObject.prototype.explode = function explode(drawer){
     var destroyExplosion = function(){
         explosion.destroy();
     };
-    window.setTimeout(destroyExplosion, 400);
+    window.setTimeout(destroyExplosion, 500);
 };
 
 SpaceObject.prototype.move = function move(step) {
