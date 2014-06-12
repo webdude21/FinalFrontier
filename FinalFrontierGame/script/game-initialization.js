@@ -1,5 +1,12 @@
 var FINAL_FRONTIER_LEVEL = 1;
 
+window.onload = function () {
+    var playPauseButton = document.getElementById('play-pause');
+    playPauseButton.addEventListener('click', runGame);
+    var playMusicOnOff = document.getElementById('music-pause');
+    playMusicOnOff.addEventListener('click', toggleMusicPause);
+};
+
 function getPlayer() {
     return new PlayerShip({
         rotation: 0,

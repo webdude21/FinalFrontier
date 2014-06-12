@@ -1,0 +1,44 @@
+body, button, div, canvas, fieldset{
+  margin: 0;
+  padding: 0;
+}
+
+.alternativeLook() {
+  padding: 10px;
+  border: 2px dashed #C3C3C6;
+  border-radius: 10px;
+  background-color: black;
+  outline: none;
+  font-size: 18px;
+  font-family: 'Arial';
+  color: #d9d9dc;
+  font-weight: bolder;
+}
+
+#wrapper {
+  overflow: hidden;
+  padding: 15px;
+
+  #button-panel{
+    border: none;
+    padding-left: 20px;
+
+    button {
+      margin-bottom: 10px;
+      .alternativeLook();
+      display: block;
+      &:hover{
+        background-color: grey;
+      }
+    }
+  }
+
+  #game-window {
+    float: left;
+    canvas {
+      cursor: url(../resources/art/aim-alternative.cur), auto;
+      border: 1px solid black;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    }
+  }
+}

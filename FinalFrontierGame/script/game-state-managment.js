@@ -14,10 +14,6 @@ function togglePlayPauseButton() {
     }
 }
 
-window.onload = function () {
-    var playPauseButton = document.getElementById('play-pause');
-    playPauseButton.addEventListener('click', runGame);
-};
 
 function clearTimers() {
     for (var i = 0; i < GAME_TIMERS.length; i++) {
