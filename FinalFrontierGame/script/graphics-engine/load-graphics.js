@@ -1,4 +1,4 @@
-var GAME_ART = (function() {
+var GAME_ART = (function () {
     'use strict';
 
     function loadImg(src) {
@@ -14,6 +14,6 @@ var GAME_ART = (function() {
         BULLET: loadImg('resources/art/bullet.png'),
         DRONE: loadImg('resources/art/drone.png'),
         DRONE_BULLET: loadImg('resources/art/drone-bullet.png'),
-        EXPLOSION: loadImg(resources/art/explosion.png)
+        EXPLOSION: loadImg('resources/art/explosion.png')
     };
 }());
