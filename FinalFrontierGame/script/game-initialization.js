@@ -83,8 +83,10 @@ function attachControls(playerShip, gameField) {
 function enemyGenerationInit(spaceObjectManager, playerShip) {
     var randomWalkerGenerator = getRandomWalkerGenerator(spaceObjectManager);
     var randomDroneGenerator = getRandomDroneGenerator(spaceObjectManager, playerShip);
-    setInterval(randomWalkerGenerator, 4000);
-    setInterval(randomDroneGenerator, 7000);
+    enemyGenerationEventQueue = [];
+    enemyGenerationEventQueue.push(setInterval(randomWalkerGenerator, 4000));
+    enemyGenerationEventQueue.push(setInterval(randomDroneGenerator, 7000));
+    return enemyGenerationEventQueue
 }
 
 function setBackground(gameField) {
@@ -94,8 +96,13 @@ function setBackground(gameField) {
     backgroundDrawer.drawAll();
 }
 
-function setLevelUpInterval(interval){
+function setLevelUpInterval(interval) {
     setInterval(function () {
         FINAL_FRONTIER_LEVEL++;
     }, interval);
+}
+
+function initTimers(spaceObjectManager, playerShip) {
+    GAME_TIMERS = enemyGenerationInit(spaceObjectManager, playerShip);
+    GAME_TIMERS.push(setLevelUpInterval(60000));
 }

@@ -54,7 +54,7 @@ var STATS_MANAGER = function statistics(args) {
     var levelCount = new Kinetic.Text({
         x: args.x + level.getTextWidth() + 10,
         y: args.y + score.getTextHeight() * 2 + lineSpacing * 2,
-        text: FINAL_FRONTIER_LEVEL,
+        text: FINAL_FRONTIER_LEVEL.toString(),
         fontSize: args.fontSize,
         fontWeight: args.fontWeight,
         fontFamily: args.fontFamily,
@@ -72,7 +72,7 @@ var STATS_MANAGER = function statistics(args) {
         update: function update() {
             livesCount.text(args.player.getLives());
             scoreCount.text(args.player.getScore());
-            levelCount.text = FINAL_FRONTIER_LEVEL;
+            levelCount.text = FINAL_FRONTIER_LEVEL.toString();
             args.layer.draw();
         }
     };
