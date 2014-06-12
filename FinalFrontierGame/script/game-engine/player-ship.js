@@ -18,6 +18,7 @@ var PlayerShip;
         instance.shootingRate = 12;
         instance.lives = 3;
         instance.score = 0;
+        instance.scoreIncreaseRate = 1;
         instance.respawnTime = 120;
         instance.respawnOpacity = 0;
         CHECK_THIS_SHIP = instance;
@@ -37,7 +38,7 @@ PlayerShip.prototype.rotate = function rotate(angle) {
 
 PlayerShip.prototype.update = function update(gameInfo) {
     if (this.hasExpired) {
-        this.respawn();
+        this.reSpawn();
     } else {
         this.refreshProperties();
         this.isHit(gameInfo);
@@ -58,23 +59,29 @@ PlayerShip.prototype.getLives = function getLives() {
     return this.lives;
 };
 
-PlayerShip.prototype.respawn = function respawn() {
-    if (this.respawnTime == 120) {
-        this.visual.opacity(this.respawnOpacity);
-        this.visual.attrs.x = GAME_FIELD_WIDTH / 2;
-        this.visual.attrs.y = GAME_FIELD_HEIGHT / 2;
-        this.lives -= 1;
-        this.respawnTime -= 1;
-    } else if (this.respawnTime > 0) {
-        this.move(this.speed);
-        this.refreshProperties();
-        this.respawnOpacity += 0.012;
-        this.visual.opacity(this.respawnOpacity);
-        this.respawnTime -= 1;
-    } else {
-        this.hasExpired = false;
-        this.respawnTime = 120;
-        this.respawnOpacity = 0;
+PlayerShip.prototype.increaseScore = function increaseScore() {
+    this.score += this.scoreIncreaseRate;
+};
+
+PlayerShip.prototype.reSpawn = function reSpawn() {
+    if (this.lives > 0){
+        if (this.respawnTime == 120) {
+            this.visual.opacity(this.respawnOpacity);
+            this.visual.attrs.x = GAME_FIELD_WIDTH / 2;
+            this.visual.attrs.y = GAME_FIELD_HEIGHT / 2;
+            this.lives -= 1;
+            this.respawnTime -= 1;
+        } else if (this.respawnTime > 0) {
+            this.move(this.speed);
+            this.refreshProperties();
+            this.respawnOpacity += 0.012;
+            this.visual.opacity(this.respawnOpacity);
+            this.respawnTime -= 1;
+        } else {
+            this.hasExpired = false;
+            this.respawnTime = 120;
+            this.respawnOpacity = 0;
+        }
     }
 };
 

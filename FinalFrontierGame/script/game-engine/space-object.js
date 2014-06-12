@@ -107,9 +107,15 @@ SpaceObject.prototype.isHit = function isHit(gameInfo) {
             if (gameInfo.objectManager.checkIfTwoObjectsCollide(obj, this)) {
                 this.hasExpired = true;
                 obj.hasExpired = true;
+
                 if (this.deathSound) {
                     this.deathSound();
                 }
+
+                if (obj.shooter.increaseScore){
+                    obj.shooter.increaseScore();
+                }
+
                 this.explode(gameInfo.drawer);
             }
         }

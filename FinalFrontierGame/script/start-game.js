@@ -8,7 +8,6 @@ function startGame() {
     setBackground(gameField);
     var foregroundDrawer = new KineticDrawer(gameField.foreground);
     var spaceObjectManager = new SpaceObjectManager(foregroundDrawer);
-
     var playerShip = getPlayer();
     spaceObjectManager.add(playerShip);
     spaceObjectManager.playerShip = playerShip;

@@ -1,6 +1,5 @@
 var STATS_MANAGER = function statistics(args) {
 
-
     var lives = new Kinetic.Text({
         x: args.x,
         y: args.y,
