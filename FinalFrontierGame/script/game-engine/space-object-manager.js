@@ -26,7 +26,7 @@ var SpaceObjectManager = (function () {
                         secondObject.x > firstObject.x) {
                         if (secondObject.y < firstObject.y + firstObject.height &&
                             secondObject.y > firstObject.y) {
-                            return true
+                            return true;
                         }
                     }
                 }

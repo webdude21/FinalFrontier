@@ -16,8 +16,8 @@ function startGame() {
         rotation: 0,
         speed: 4,
         shape: new Kinetic.Image({
-            x: 50,
-            y: 50,
+            x: GAME_FIELD_WIDTH / 2,
+            y: GAME_FIELD_HEIGHT / 2,
             image: GAME_ART.PLAYER_SHIP,
             width: GAME_ART.PLAYER_SHIP.width,
             height: GAME_ART.PLAYER_SHIP.height,

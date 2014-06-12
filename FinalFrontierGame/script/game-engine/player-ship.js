@@ -17,7 +17,9 @@ var PlayerShip;
         instance = this;
         instance.shootingRate = 12;
         instance.lives = 3;
-        instance.score = 10;
+        instance.score = 0;
+        instance.respawnTime = 120;
+        instance.respawnOpacity = 0;
         CHECK_THIS_SHIP = instance;
     };
 }());
@@ -34,21 +36,44 @@ PlayerShip.prototype.rotate = function rotate(angle) {
 };
 
 PlayerShip.prototype.update = function update(gameInfo) {
-    this.refreshProperties();
-    this.isHit(gameInfo);
-    this.checkIfExpired(gameInfo);
-    this.move(this.speed);
-    if (this.pendingBullet) {
-        if (this.shotSound) {
-            this.shotSound();
+    if (this.hasExpired) {
+        this.respawn();
+    } else {
+        this.refreshProperties();
+        this.isHit(gameInfo);
+        this.move(this.speed);
+
+        if (this.pendingBullet) {
+            if (this.shotSound) {
+                this.shotSound();
+            }
+
+            gameInfo.objectManager.add(this.pendingBullet);
+            this.pendingBullet = null;
         }
-        gameInfo.objectManager.add(this.pendingBullet);
-        this.pendingBullet = null;
     }
 };
 
 PlayerShip.prototype.getLives = function getLives() {
     return this.lives;
+};
+
+PlayerShip.prototype.respawn = function respawn() {
+    if (this.respawnTime == 120) {
+        this.visual.opacity(this.respawnOpacity);
+        this.changeHorizontalPostion(GAME_FIELD_WIDTH / 2);
+        this.changeVerticalPostion(GAME_FIELD_HEIGHT / 2);
+        this.lives -= 1;
+        this.respawnTime -= 1;
+    } else if (this.respawnTime > 0) {
+        this.respawnOpacity += 0.012;
+        this.visual.opacity(this.respawnOpacity);
+        this.respawnTime -= 1;
+    } else {
+        this.hasExpired = false;
+        this.respawnTime = 120;
+        this.respawnOpacity = 0;
+    }
 };
 
 PlayerShip.prototype.getScore = function getScore() {
