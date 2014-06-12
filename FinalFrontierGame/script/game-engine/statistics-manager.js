@@ -1,55 +1,57 @@
-var STATS_MANAGER = function statistics(layer, player) {
-	var lives = new Kinetic.Text({
-	    x: 25,
-	    y: 25,
-	    text: 'Lives:',
-	    fontSize: 20,
-	    fontWeight: 'bold',
-	    fontFamily: 'Arial',
-	    fill: '#fff'
-	});
+var STATS_MANAGER = function statistics(args) {
 
-	var livesCount = new Kinetic.Text({
-	    x: 25 + lives.getTextWidth() + 10,
-	    y: 25,
-	    text: player.getLives(),
-	    fontSize: 20,
-	    fontWeight: 'bold',
-	    fontFamily: 'Arial',
-	    fill: '#fff'
-	});
 
-	var score = new Kinetic.Text({
-	    x: 25,
-	    y: 25 + lives.getTextHeight() + 10,
-	    text: 'Score:',
-	    fontSize: 20,
-	    fontWeight: 'bold',
-	    fontFamily: 'Arial',
-	    fill: '#fff'
-	});
+    var lives = new Kinetic.Text({
+        x: args.x,
+        y: args.y,
+        text: 'Lives:',
+        fontSize: args.fontSize,
+        fontWeight: args.fontWeight,
+        fontFamily: args.fontFamily,
+        fill: args.fillColor
+    });
 
-	var scoreCount = new Kinetic.Text({
-	    x: 25 + score.getTextWidth() + 10,
-	    y: 25 + lives.getTextHeight() + 10,
-	    text: player.getScore(),
-	    fontSize: 20,
-	    fontWeight: 'bold',
-	    fontFamily: 'Arial',
-	    fill: '#fff'
-	});
+    var livesCount = new Kinetic.Text({
+        x: args.x + lives.getTextWidth() + 10,
+        y: args.y,
+        text: args.player.getLives(),
+        fontSize: args.fontSize,
+        fontWeight: args.fontWeight,
+        fontFamily: args.fontFamily,
+        fill: args.fillColor
+    });
 
-	layer.add(lives);
-	layer.add(livesCount);
-	layer.add(score);
-	layer.add(scoreCount);
-	layer.draw();
+    var score = new Kinetic.Text({
+        x: args.x,
+        y: args.y + lives.getTextHeight() + 10,
+        text: 'Score:',
+        fontSize: args.fontSize,
+        fontWeight: args.fontWeight,
+        fontFamily: args.fontFamily,
+        fill: args.fillColor
+    });
 
-	return {
-		update: function update() {
-			livesCount.text(player.getLives());
-			scoreCount.text(player.getScore());
-			layer.draw();
-		}
-	};
+    var scoreCount = new Kinetic.Text({
+        x: args.x + score.getTextWidth() + 10,
+        y: args.y + lives.getTextHeight() + 10,
+        text: args.player.getScore(),
+        fontSize: args.fontSize,
+        fontWeight: args.fontWeight,
+        fontFamily: args.fontFamily,
+        fill: args.fillColor
+    });
+
+    args.layer.add(lives);
+    args.layer.add(livesCount);
+    args.layer.add(score);
+    args.layer.add(scoreCount);
+    args.layer.draw();
+
+    return {
+        update: function update() {
+            livesCount.text(args.player.getLives());
+            scoreCount.text(args.player.getScore());
+            args.layer.draw();
+        }
+    };
 };

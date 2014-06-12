@@ -18,11 +18,10 @@ var GameField = (function () {
             instance.stage.add(newLayer);
             return newLayer;
         };
-        
+
         instance.background = instance.addNewLayer();
         instance.statistics = instance.addNewLayer();
-        instance.foreground = instance.addNewLayer();        
-        // instance.foreground.moveToTop();
+        instance.foreground = instance.addNewLayer();
     };
     return GameField;
 }());

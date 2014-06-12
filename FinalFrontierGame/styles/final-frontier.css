@@ -1,5 +1,5 @@
 #game-window canvas {
-  	cursor: url(../resources/art/aim-alternative.cur), auto;
+    cursor: url(../resources/art/aim-alternative.cur), auto;
     border: 1px solid black;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
 }
