@@ -3,6 +3,7 @@ var GAME_FIELD_WIDTH = 800,
 
 function startGame() {
     // initialize game variables
+    soundInit();
     var gameField = new GameField(GAME_FIELD_WIDTH, GAME_FIELD_HEIGHT, 'game-window');
     var backgroundDrawer = new KineticDrawer(gameField.background);
     var background = GAME_ART.BACKGROUND;
@@ -23,7 +24,6 @@ function startGame() {
             offset: {x: GAME_ART.PLAYER_SHIP.width / 2, y: GAME_ART.PLAYER_SHIP.height / 2}
         })
     });
-
 
     var generateRandomWalker = function () {
         var validPosition = generateValidPosition(GAME_ART.WALKER.height, GAME_ART.WALKER.width);
@@ -77,7 +77,6 @@ function startGame() {
         controllableObj: playerShip,
         objectHandler: gameField.stage
     });
-
 
     function runGame() {
         spaceObjectManager.update();
