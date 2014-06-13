@@ -19,6 +19,14 @@ Walker.prototype.constructor = Walker;
 Walker.prototype.isHit = SpaceObject.prototype.isHit;
 
 Walker.prototype.move = function move() {
+    if (this.properties.y < 0 || this.properties.y + this.properties.height > GAME_FIELD_HEIGHT) {
+        this.direction.y = -this.direction.y;
+    }
+
+    if (this.properties.x < 0 || this.properties.x + this.properties.width > GAME_FIELD_WIDTH) {
+        this.direction.x = -this.direction.x;
+    }
+
     this.visual.move(this.direction);
 };
 
@@ -56,6 +64,7 @@ Walker.prototype.update = function update(gameInfo) {
         this.randomDirectionChange();
         this.shootingDelay = 0;
     }
+    
     this.move();
     this.refreshProperties();
     this.isHit(gameInfo);
