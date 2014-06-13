@@ -39,19 +39,23 @@ PlayerShip.prototype.rotate = function rotate(angle) {
 PlayerShip.prototype.update = function update(gameInfo) {
     if (this.hasExpired) {
         this.reSpawn();
-    } else {
-        this.refreshProperties();
+    }
+
+    this.refreshProperties();
+
+    if (!this.hasExpired) {
         this.isHit(gameInfo);
-        this.move(this.speed);
+    }
 
-        if (this.pendingBullet) {
-            if (this.shotSound) {
-                this.shotSound();
-            }
+    this.move(this.speed);
 
-            gameInfo.objectManager.add(this.pendingBullet);
-            this.pendingBullet = null;
+    if (this.pendingBullet) {
+        if (this.shotSound) {
+            this.shotSound();
         }
+
+        gameInfo.objectManager.add(this.pendingBullet);
+        this.pendingBullet = null;
     }
 };
 
@@ -72,8 +76,6 @@ PlayerShip.prototype.reSpawn = function reSpawn() {
             this.lives -= 1;
             this.respawnTime -= 1;
         } else if (this.respawnTime > 0) {
-            this.move(this.speed);
-            this.refreshProperties();
             this.respawnOpacity += 0.012;
             this.visual.opacity(this.respawnOpacity);
             this.respawnTime -= 1;
