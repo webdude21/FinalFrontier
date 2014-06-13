@@ -103,7 +103,7 @@ SpaceObject.prototype.checkIfExpired = function checkIfExpired(gameInfo) {
 
 SpaceObject.prototype.isHit = function isHit(gameInfo) {
     gameInfo.spaceObjects.forEach(function (obj) {
-        if (obj instanceof Bullet && !(obj.shooter === this)) {
+        if (obj instanceof Bullet && obj.shooter !== this) {
             if (gameInfo.objectManager.checkIfTwoObjectsCollide(obj, this)) {
                 this.hasExpired = true;
                 obj.hasExpired = true;

@@ -87,12 +87,12 @@ function attachControls(playerShip, gameField) {
     });
 }
 
-function enemyGenerationInit(spaceObjectManager, playerShip) {
+function enemyGenerationInit(spaceObjectManager, playerShip, level) {
     var randomWalkerGenerator = getRandomWalkerGenerator(spaceObjectManager);
     var randomDroneGenerator = getRandomDroneGenerator(spaceObjectManager, playerShip);
-    enemyGenerationEventQueue = [];
-    enemyGenerationEventQueue.push(setInterval(randomWalkerGenerator, 4000));
-    enemyGenerationEventQueue.push(setInterval(randomDroneGenerator, 7000));
+    var enemyGenerationEventQueue = [];
+    enemyGenerationEventQueue.push(setInterval(randomWalkerGenerator, Math.floor(4000 / level)));
+    enemyGenerationEventQueue.push(setInterval(randomDroneGenerator, Math.floor(7000 / level)));
     return enemyGenerationEventQueue;
 }
 
@@ -106,10 +106,12 @@ function setBackground(gameField) {
 function setLevelUpInterval(interval) {
     return setInterval(function () {
         FINAL_FRONTIER_LEVEL++;
+        clearTimers();
+        initTimers(FINAL_FRONTIER_GLOBALS.spaceObjectsManager, FINAL_FRONTIER_GLOBALS.playerShip);
     }, interval);
 }
 
 function initTimers(spaceObjectManager, playerShip) {
-    GAME_TIMERS = enemyGenerationInit(spaceObjectManager, playerShip);
-    GAME_TIMERS.push(setLevelUpInterval(60000));
+    GAME_TIMERS = enemyGenerationInit(spaceObjectManager, playerShip, FINAL_FRONTIER_LEVEL);
+    GAME_TIMERS.push(setLevelUpInterval(30000));
 }
