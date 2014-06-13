@@ -18,7 +18,7 @@ var PlayerShip;
         instance.shootingRate = 12;
         instance.lives = 3;
         instance.score = 0;
-        instance.scoreIncreaseRate = 1;
+        instance.scoreIncreaseRate = 10;
         instance.respawnTime = 120;
         instance.respawnOpacity = 0;
         CHECK_THIS_SHIP = instance;
@@ -82,6 +82,8 @@ PlayerShip.prototype.reSpawn = function reSpawn() {
             this.respawnTime = 120;
             this.respawnOpacity = 0;
         }
+    } else {
+        gameOver();
     }
 };
 

@@ -30,7 +30,7 @@ function attachShotSounds() {
 function musicLoop() {
     var music = createjs.Sound.play('backgroundMusic');
     music.addEventListener('complete', musicLoop);
-    return music
+    return music;
 }
 
 function toggleMusicPause(){

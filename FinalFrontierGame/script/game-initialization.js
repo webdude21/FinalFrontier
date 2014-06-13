@@ -93,7 +93,7 @@ function enemyGenerationInit(spaceObjectManager, playerShip) {
     enemyGenerationEventQueue = [];
     enemyGenerationEventQueue.push(setInterval(randomWalkerGenerator, 4000));
     enemyGenerationEventQueue.push(setInterval(randomDroneGenerator, 7000));
-    return enemyGenerationEventQueue
+    return enemyGenerationEventQueue;
 }
 
 function setBackground(gameField) {

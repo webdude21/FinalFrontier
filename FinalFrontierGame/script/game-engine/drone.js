@@ -49,7 +49,7 @@ Drone.prototype.seek = function seek(target) {
         target.properties);
 };
 
-Drone.prototype.rotateTowords = function rotateTowordsPlayer(target) {
+Drone.prototype.rotateTowards = function rotateTowardsPlayer(target) {
     var xDist = target.properties.x - this.properties.centerPoint.x;
     var yDist = target.properties.y - this.properties.centerPoint.y;
     var angle = Math.atan2(yDist, xDist) * (180 / Math.PI);
@@ -98,7 +98,7 @@ Drone.prototype.update = function update(gameInfo) {
         this.isHit(gameInfo);
         this.checkIfExpired(gameInfo);
         this.seek(this.target);
-        this.rotateTowords(this.target);
+        this.rotateTowards(this.target);
         this.move();
     }
 };

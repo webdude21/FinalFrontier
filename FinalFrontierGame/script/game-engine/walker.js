@@ -35,7 +35,7 @@ Walker.prototype.spawn = function walkIn() {
         this.visual.scale({
             x: newScale,
             y: newScale
-        })
+        });
     }
     else {
         this.hasSpawned = true;

@@ -20,7 +20,7 @@ function runGame() {
     togglePlayPauseButton();
 
 
-    function runGame() {
+    function gameLoop() {
         if (FINAL_FRONTIER_GLOBALS.GAME_RUNNING) {
             spaceObjectManager.update();
             foregroundDrawer.drawAll();
@@ -28,9 +28,9 @@ function runGame() {
         }
 
         window.requestAnimFrame(function () {
-            runGame();
+            gameLoop();
         });
     }
 
-    runGame();
+    gameLoop();
 }

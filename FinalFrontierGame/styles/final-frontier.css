@@ -7,6 +7,7 @@ fieldset {
   padding: 0;
 }
 #wrapper {
+  position: relative;
   overflow: hidden;
   padding: 15px;
 }
@@ -37,4 +38,14 @@ fieldset {
   cursor: url(../resources/art/aim-alternative.cur), auto;
   border: 1px solid black;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+#game-over {
+  position: absolute;
+  z-index: 99;
+  background-color: #222;
+  opacity: 0.8;
+  text-align: center;
+  color: #fff;
+  font-size: 2em;
+  display: none;
 }
