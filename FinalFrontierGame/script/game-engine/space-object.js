@@ -103,21 +103,27 @@ SpaceObject.prototype.checkIfExpired = function checkIfExpired(gameInfo) {
 
 SpaceObject.prototype.isHit = function isHit(gameInfo) {
     gameInfo.spaceObjects.forEach(function (obj) {
-        if (obj instanceof Bullet && obj.shooter !== this) {
-            if (gameInfo.objectManager.checkIfTwoObjectsCollide(obj, this)) {
+        if (obj instanceof Bullet) {
+            if (obj.shooter !== this) {
+                if (gameInfo.objectManager.checkIfTwoObjectsCollide(obj, this)) {
+                    this.hasExpired = true;
+                    obj.hasExpired = true;
+                    if (obj.shooter.increaseScore) {
+                        obj.shooter.increaseScore();
+                    }
+                }
+            }
+        } else {
+            if (gameInfo.objectManager.checkIfTwoObjectsCollide(obj, this)){
                 this.hasExpired = true;
                 obj.hasExpired = true;
-
-                if (this.deathSound) {
-                    this.deathSound();
-                }
-
-                if (obj.shooter.increaseScore){
-                    obj.shooter.increaseScore();
-                }
-
-                this.explode(gameInfo.drawer);
             }
+        }
+        if (this.hasExpired) {
+            if (this.deathSound) {
+                this.deathSound();
+            }
+            this.explode(gameInfo.drawer);
         }
     }, this);
 };
