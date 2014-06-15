@@ -81,3 +81,24 @@ svg:hover #phone { fill: darkslateblue; }
     padding: 10px;
     position: fixed;
 }
+svg:hover text { fill : darkslateblue; }
+#play{
+    background-color: #000000;
+    border: 2px dashed #C3C3C6;
+    border-radius: 10px;
+    color: #D9D9DC;
+    display: block;
+    font-family: 'Arial';
+    font-size: 18px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    margin-left: 79px;
+    margin-top: -71px;
+    outline: medium none;
+    padding: 10px;
+    position: fixed;
+}
+
+text{ transition: 2s; }
+
+ 
