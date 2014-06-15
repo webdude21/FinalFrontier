@@ -5,6 +5,10 @@ var GAME_FIELD_WIDTH = 800,
 function runGame() {
 
     soundInit();
+	var svg = document.getElementById('Layer_1');
+	svg.setAttribute("style","display: none;");
+	var playPauseBtn = document.getElementById('play-pause');
+	playPauseBtn.setAttribute("style","display: inline;");
     var gameField = new GameField(GAME_FIELD_WIDTH, GAME_FIELD_HEIGHT, 'game-window');
     setBackground(gameField);
     var foregroundDrawer = new KineticDrawer(gameField.foreground);
