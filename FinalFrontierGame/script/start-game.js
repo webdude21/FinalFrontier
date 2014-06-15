@@ -5,7 +5,7 @@ var GAME_FIELD_WIDTH = 800,
 function runGame() {
 
     soundInit();
-	var svg = document.getElementById('Layer_1');
+	var svg = document.getElementById('svg-mobile');
 	svg.setAttribute("style","display: none;");
 	var playPauseBtn = document.getElementById('play-pause');
 	playPauseBtn.setAttribute("style","display: inline;");
